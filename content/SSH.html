@@ -123,7 +123,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='上課內容.html'>上課內容</a><ul class='dropdown'><li><a href='w1.html'>w1</a><li><a href='w2.html'>w2</a><li><a href='w3.html'>w3</a><li><a href='w4.html'>w4</a><li class='has-children'><a href='w5.html'>w5</a><ul class='dropdown'><li><a href='SSH.html'>SSH</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='上課內容.html'>上課內容</a><ul class='dropdown'><li><a href='w1.html'>w1</a><li><a href='w2.html'>w2</a><li><a href='w3.html'>w3</a><li><a href='w4.html'>w4</a><li class='has-children'><a href='w5.html'>w5</a><ul class='dropdown'><li><a href='SSH.html'>SSH</a></li></ul><li><a href='W6.html'>W6</a></li>
                       </ul>
                 </nav>
               </div>
@@ -134,13 +134,15 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w5 << <a href='w5.html'>Previous</a> <br /><h1>SSH</h1>
+    <div id="tipue_search_content">w5 << <a href='w5.html'>Previous</a> <a href='W6.html'>Next</a> >> W6<br /><h1>SSH</h1>
 <p>1.首先我們需要登入github在自己的帳號中開啟設定，在設定中尋找SSH and GPG keys ，然後先按New SSHkey做準備。</p>
 <p>2.在 start_ipv6.bat (編輯器)加入<span> </span><span>set GIT_SSH=%Disk%:\putty\plink.exe。</span></p>
 <p><span>3.開啟 Putty 目錄中的 puttygen.exe,(沒有putty從a.kmol.info:88下載)，點擊Generate下載新Key(移動滑鼠進度條才會動)，最上面出現的亂碼為新鑰匙，全選後丟進剛剛在github預備的New SSHkey(記得存)，記得用SciTE 編輯儲存鑰匙(_rsa 檔)，然後用Save private key再存一次(.ppk檔)，兩個檔案存在tmp/keys裡</span></p>
 <p>4.開啟<span>putty.exe建立一個 session用於以 ssh 協定連線到 github.com(在hostname),名稱可任意但Proxy須設定學校的(筆電不用Proxy可以選None)，Auth記得選之前儲存.ppk的檔案，最後回開頭存檔</span></p>
-<p>5.最後則是要修改tmp/wcm2021/.git裡面config的url(之前的可在前面加#即可)，url改成git@(<span>session的名子)</span>:(帳號)/(倉儲名子).git(原url下面)</p>
-<p><span></span></p><br />w5 << <a href='w5.html'>Previous</a> </div>
+<p>5.最後則是要修改tmp/wcm2021/.git裡面config的url(之前的可在前面加#即可)，url改成git@(<span>session的名子)</span>:(帳號)/(倉儲名子).git(原url下面)(是origin下面的url)</p>
+<p>名子盡量相同會增加成功率，失敗就多試幾次說不定會成功</p>
+<p></p>
+<br />w5 << <a href='w5.html'>Previous</a> <a href='W6.html'>Next</a> >> W6</div>
         
     <!-- footer -->
       <div class="container">
