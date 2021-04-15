@@ -46,7 +46,7 @@ def timeTableList():
     '''
     '''
     semester = '1092'
-    classroomno = 'BGA0810'
+    classroomno = 'BGA0830'
     column = True
     '''
     semester = request.args.get('semester')
