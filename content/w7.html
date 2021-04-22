@@ -140,7 +140,7 @@ img.add_border {
 <p>從a.kmol.info:88下載Heroku，放到data下，再用編輯器把啟動器的Heroku路徑打上。</p>
 <p>測試是否有連接上，<span>輸入 heroku version，有出現版本號便成。</span></p>
 <p><span>未出現原因</span></p>
-<p><span>1.編輯器味編寫正確</span></p>
+<p><span>1.編輯器未編寫正確</span></p>
 <p>2.檔案不完整</p>
 <p>完成後推送方法</p>
 <p>1.<code class="py plain">heroku login </code><code class="py keyword">-</code><code class="py plain">i  (<span>以 interactive 模式登入 Heroku)(記得打帳號密碼)</span></code></p>
@@ -156,6 +156,10 @@ img.add_border {
 <p>路近加上Heroku</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"> set path_heroku=%Disk%:\heroku\bin;</pre>
 <p>標示路徑<br/><br/></p>
+<p>學校電腦需要</p>
+<div class="line number1 index0 alt2"><code class="js plain">REM </code><code class="js keyword">for</code> <code class="js plain">heroku login</code></div>
+<div class="line number2 index1 alt1"><code class="js plain">set HTTP_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
+<div class="line number3 index2 alt2"><code class="js plain">set HTTPS_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
 <p></p>
 <p></p>
 <p></p>

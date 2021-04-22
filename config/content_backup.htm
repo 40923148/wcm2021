@@ -90,6 +90,7 @@
 <p>還未選課沒上到課</p>
 <h2>w2</h2>
 <p><strong>更改標題</strong></p>
+<p><span> </span>cmsimde 編輯及轉靜態網頁有關的認知</p>
 <h2>w3</h2>
 <p><strong>改版</strong></p>
 <p>我上課時要改成最新版結果失敗了，詢問老師後，好像是我有弄壞一部份的靜態，需要從遠端重新抓新的下來，下課後抽時間重新抓了一次，然後又把up_dir資料夾更新，這次沒有跑一大堆錯誤出來，但我看資料夾並沒有上課所說的五個檔案，需要星期四上課再去詢問老師。</p>
@@ -109,14 +110,14 @@
 <p></p>
 <h2>W6</h2>
 <p>今天老師說了SSH的原理嚷我更加了解SSH的運作方式，雖然我依舊不明白相同的動作，有時候會設定成功有時候不行的原因是甚麼。</p>
-<p>還有註冊heroku跟把a.kmol.info:88的heroku.7z解壓縮到data裡面，在設定<span> start_ipv6.bat (編輯器)heroku的路徑，之後要教得因為時間問題延到下禮拜(Github連結heroku的方法)</span></p>
+<p>還有註冊heroku跟把<a href="/a.kmol.info:88">a.kmol.info:88</a>的heroku.7z解壓縮到data裡面，在設定<span> start_ipv6.bat (編輯器)heroku的路徑，之後要教得因為時間問題延到下禮拜(Github連結heroku的方法)</span></p>
 <h2>w7</h2>
 <p><span></span>開始準備期中分組報告</p>
 <p>heroku連結到倉儲，需要</p>
 <p>從a.kmol.info:88下載Heroku，放到data下，再用編輯器把啟動器的Heroku路徑打上。</p>
 <p>測試是否有連接上，<span>輸入 heroku version，有出現版本號便成。</span></p>
 <p><span>未出現原因</span></p>
-<p><span>1.編輯器味編寫正確</span></p>
+<p><span>1.編輯器未編寫正確</span></p>
 <p>2.檔案不完整</p>
 <p>完成後推送方法</p>
 <p>1.<code class="py plain">heroku login </code><code class="py keyword">-</code><code class="py plain">i  (<span>以 interactive 模式登入 Heroku)(記得打帳號密碼)</span></code></p>
@@ -132,6 +133,10 @@
 <p>路近加上Heroku</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"> set path_heroku=%Disk%:\heroku\bin;</pre>
 <p>標示路徑<br/><br/></p>
+<p>學校電腦需要</p>
+<div class="line number1 index0 alt2"><code class="js plain">REM </code><code class="js keyword">for</code> <code class="js plain">heroku login</code></div>
+<div class="line number2 index1 alt1"><code class="js plain">set HTTP_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
+<div class="line number3 index2 alt2"><code class="js plain">set HTTPS_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
 <p></p>
 <p></p>
 <p></p>
@@ -236,3 +241,6 @@ if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
 </pre>
 <p></p>
+<div id="gtx-trans" style="position: absolute; left: 197px; top: 2248.49px;">
+<div class="gtx-trans-icon"></div>
+</div>
