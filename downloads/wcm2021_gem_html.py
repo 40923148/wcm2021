@@ -1,9 +1,9 @@
 # stage3_gen_html.py
-studList = "stage3_2a.txt"
+studList = "wcm2021_list.txt"
 courTitle = "wcm2021"
 
 # group title initial
-grpTitle = studList[:7] + "-"  + "-ag"
+grpTitle = studList[:7] + "-ag"
 
 # student Account and github Account as inputs
 def perWeb(s, g):
