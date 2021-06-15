@@ -136,12 +136,11 @@ img.add_border {
         </header>
     <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='第二題.html'>Next</a> >> 第二題<br /><h1>第一題</h1>
 <p><strong><a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></strong></p>
-<p>可攜程式系統的命令列視窗輸入 pip install robodk </p>
-<p></p>
-<p>開啟robodk(記得要前往 工具/選項/其他/打勾允許外部AIP並且輸入目前電腦網路IP</p>
-<p>pick_and_place除程式碼都拉近robodk</p>
-<p></p>
-<p>開啟Python-robodk-Install.bat(robodk下</p>
+<p>1.可攜程式系統的命令列視窗輸入 (pip install robodk) 要連結robodk</p>
+<p>2.開啟robodk(記得要前往 工具/選項/其他/打勾允許外部API並且輸入目前電腦網路IP</p>
+<p>ip查詢:ipconfig /all</p>
+<p>3.pick_and_place (題目資料夾)  除程式碼(.py)都拉近robodk</p>
+<p>4.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">:: cd Python
 
 :: Install RoboDK API
@@ -157,7 +156,7 @@ python.exe -m pip install "rope&gt;=0.14" --retries=2
 python.exe Python_Versions.py
 
 pause</pre>
-<p>和apick_and_place.py(注意go之前IP要設定目前連線網路的IP</p>
+<p>5.pick_and_place.py用SCITE啟動(啟動前注意ip有沒有出錯)(題目資料夾)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># KMOLab Portable RoboDK pick and place
 from robolink import *    # API to communicate with robodk
 from robodk import *      # robodk robotics toolbox

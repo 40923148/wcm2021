@@ -1,4 +1,5 @@
-<h1>First</h1><br/><br/>期中報告
+<h1>First</h1>
+<p><br/><br/>期中報告</p>
 <p>組長:張煒中</p>
 <p>組員:周玥辰，方冠勛，吳定隆，周育德，張智程</p>
 <p></p>
@@ -257,12 +258,11 @@ if __name__ == '__main__':
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/P2E8i0ylJjQ" width="560"></iframe></p>
 <h3>第一題</h3>
 <p><strong><a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></strong></p>
-<p>可攜程式系統的命令列視窗輸入 pip install robodk </p>
-<p></p>
-<p>開啟robodk(記得要前往 工具/選項/其他/打勾允許外部AIP並且輸入目前電腦網路IP</p>
-<p>pick_and_place除程式碼都拉近robodk</p>
-<p></p>
-<p>開啟Python-robodk-Install.bat(robodk下</p>
+<p>1.可攜程式系統的命令列視窗輸入 (pip install robodk) 要連結robodk</p>
+<p>2.開啟robodk(記得要前往 工具/選項/其他/打勾允許外部API並且輸入目前電腦網路IP</p>
+<p>ip查詢:ipconfig /all</p>
+<p>3.pick_and_place (題目資料夾)  除程式碼(.py)都拉近robodk</p>
+<p>4.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">:: cd Python
 
 :: Install RoboDK API
@@ -278,7 +278,7 @@ python.exe -m pip install "rope&gt;=0.14" --retries=2
 python.exe Python_Versions.py
 
 pause</pre>
-<p>和apick_and_place.py(注意go之前IP要設定目前連線網路的IP</p>
+<p>5.pick_and_place.py用SCITE啟動(啟動前注意ip有沒有出錯)(題目資料夾)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># KMOLab Portable RoboDK pick and place
 from robolink import *    # API to communicate with robodk
 from robodk import *      # robodk robotics toolbox
@@ -470,9 +470,8 @@ robot.MoveJ([0,0,0,0,10,-200])
 <p></p>
 <h3>第二題</h3>
 <p><a href="https://drive.google.com/file/d/11GFhWqvkCswY2KbLOPB7vRT0EvoiKpdU/view?usp=sharing">pick and place final 專案下載</a></p>
-<p></p>
-<p>robodkdk可以不用開啟</p>
-<p><span>開啟Python-robodk-Install.bat(robodk下</span></p>
+<p>1.關閉robodk(沒開就跳過</p>
+<p><span>2.Python-robodk-Install.bat</span></p>
 <p>開啟pick_and_place_using_python_api.py(注意路徑要改成電腦robodk真正的路徑</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from robolink import *
 from robodk import *
@@ -699,8 +698,8 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <h2>w16</h2>
 <p>將13~15周所做的事情推到<a href="https://github.com/mdecourse/wcm2021/discussions/19">https://github.com/mdecourse/wcm2021/discussions/19</a></p>
 <p>完成fossil倉儲推送<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/8PDsPCRjCXE" width="560"></iframe></p>
-<p>fossil推送</p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/8PDsPCRjCXE" width="560"></iframe></p>
+<p>fossil推送<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/FYjGbGHYVHQ" width="560"></iframe></p>
+<p></p>
 <h3>作業</h3>
 <p>16~18周功課布置<span>完成兩台 Heroku 平台上的虛擬主機</span></p>
 <h4><span>主機一: 利用 Heroku 呈現靜態網頁內容.</span></h4>

@@ -1,4 +1,5 @@
-<h1>First</h1><br/><br/>期中報告
+<h1>First</h1>
+<p><br/><br/>期中報告</p>
 <p>組長:張煒中</p>
 <p>組員:周玥辰，方冠勛，吳定隆，周育德，張智程</p>
 <p></p>
@@ -257,12 +258,11 @@ if __name__ == '__main__':
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/P2E8i0ylJjQ" width="560"></iframe></p>
 <h3>第一題</h3>
 <p><strong><a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></strong></p>
-<p>可攜程式系統的命令列視窗輸入 pip install robodk </p>
-<p></p>
-<p>開啟robodk(記得要前往 工具/選項/其他/打勾允許外部AIP並且輸入目前電腦網路IP</p>
-<p>pick_and_place除程式碼都拉近robodk</p>
-<p></p>
-<p>開啟Python-robodk-Install.bat(robodk下</p>
+<p>1.可攜程式系統的命令列視窗輸入 (pip install robodk) 要連結robodk</p>
+<p>2.開啟robodk(記得要前往 工具/選項/其他/打勾允許外部API並且輸入目前電腦網路IP</p>
+<p>ip查詢:ipconfig /all</p>
+<p>3.pick_and_place (題目資料夾)  除程式碼(.py)都拉近robodk</p>
+<p>4.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">:: cd Python
 
 :: Install RoboDK API
@@ -278,7 +278,7 @@ python.exe -m pip install "rope&gt;=0.14" --retries=2
 python.exe Python_Versions.py
 
 pause</pre>
-<p>和apick_and_place.py(注意go之前IP要設定目前連線網路的IP</p>
+<p>5.pick_and_place.py用SCITE啟動(啟動前注意ip有沒有出錯)(題目資料夾)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># KMOLab Portable RoboDK pick and place
 from robolink import *    # API to communicate with robodk
 from robodk import *      # robodk robotics toolbox
@@ -470,10 +470,25 @@ robot.MoveJ([0,0,0,0,10,-200])
 <p></p>
 <h3>第二題</h3>
 <p><a href="https://drive.google.com/file/d/11GFhWqvkCswY2KbLOPB7vRT0EvoiKpdU/view?usp=sharing">pick and place final 專案下載</a></p>
-<p></p>
-<p>robodkdk可以不用開啟</p>
-<p><span>開啟Python-robodk-Install.bat(robodk下</span></p>
-<p>開啟pick_and_place_using_python_api.py(注意路徑要改成電腦robodk真正的路徑</p>
+<p>1.關閉robodk(沒開就跳過)</p>
+<p>2.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">:: cd Python
+
+:: Install RoboDK API
+python.exe -m pip install  "./Python/." -I
+
+:: Install pylint (linting for VScode)
+python.exe -m pip install "pylint&gt;=2.3" --retries=2
+
+:: Install rope (easy variable renaming in VScode)
+python.exe -m pip install "rope&gt;=0.14" --retries=2
+
+:: Display all installed packages
+python.exe Python_Versions.py
+
+pause</pre>
+<p>3.pick_and_place_using_python_api.py用SCITE啟動(注意路徑要改成電腦robodk真正的路徑)</p>
+<p>(題目資料夾)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from robolink import *
 from robodk import *
  
@@ -689,8 +704,7 @@ while idTake &gt;= 0:
  
 # Move home when the robot finishes
 robot.MoveJ([0,0,0,0,10,-200])</pre>
-<p><br/><br/></p>
-<h2>w14</h2>
+<p><br/><br/></p><h2>w14</h2>
 <p>wcm2021-ag1<br/> <a href="https://40923135.github.io/wcm2021">40923135 web</a> | <a href="https://github.com/40923135/wcm2021">40923135 repo</a> | <a href="https://40923135.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923135/wcm2021-ag1">grp repo</a> <br/> <a href="https://40923108.github.io/wcm2021">40923108 web</a> | <a href="https://github.com/40923108/wcm2021">40923108 repo</a> | <a href="https://40923108.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923108/wcm2021-ag1">grp repo</a> <br/> <a href="https://40923101.github.io/wcm2021">40923101 web</a> | <a href="https://github.com/40923101/wcm2021">40923101 repo</a> | <a href="https://40923101.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923101/wcm2021-ag1">grp repo</a> <br/> <a href="https://40923142.github.io/wcm2021">40923142 web</a> | <a href="https://github.com/40923142/wcm2021">40923142 repo</a> | <a href="https://40923142.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923142/wcm2021-ag1">grp repo</a> <br/> wcm2021-ag2<br/> <a href="https://40923105.github.io/wcm2021">40923105 web</a> | <a href="https://github.com/40923105/wcm2021">40923105 repo</a> | <a href="https://40923105.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923105/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923104.github.io/wcm2021">40923104 web</a> | <a href="https://github.com/40923104/wcm2021">40923104 repo</a> | <a href="https://40923104.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923104/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923107.github.io/wcm2021">40923107 web</a> | <a href="https://github.com/40923107/wcm2021">40923107 repo</a> | <a href="https://40923107.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923107/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923110.github.io/wcm2021">40923110 web</a> | <a href="https://github.com/40923110/wcm2021">40923110 repo</a> | <a href="https://40923110.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923110/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923102.github.io/wcm2021">40923102 web</a> | <a href="https://github.com/40923102/wcm2021">40923102 repo</a> | <a href="https://40923102.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923102/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923106.github.io/wcm2021">40923106 web</a> | <a href="https://github.com/40923106/wcm2021">40923106 repo</a> | <a href="https://40923106.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923106/wcm2021-ag2">grp repo</a> <br/> wcm2021-ag3<br/> <a href="https://40923123.github.io/wcm2021">40923123 web</a> | <a href="https://github.com/40923123/wcm2021">40923123 repo</a> | <a href="https://40923123.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923123/wcm2021-ag3">grp repo</a> <br/> <a href="https://40923151.github.io/wcm2021">40923151 web</a> | <a href="https://github.com/40923151/wcm2021">40923151 repo</a> | <a href="https://40923151.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923151/wcm2021-ag3">grp repo</a> <br/> <a href="https://40923139.github.io/wcm2021">40923139 web</a> | <a href="https://github.com/40923139/wcm2021">40923139 repo</a> | <a href="https://40923139.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923139/wcm2021-ag3">grp repo</a> <br/> <a href="https://40923147.github.io/wcm2021">40923147 web</a> | <a href="https://github.com/40923147/wcm2021">40923147 repo</a> | <a href="https://40923147.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923147/wcm2021-ag3">grp repo</a> <br/> wcm2021-ag4<br/> <a href="https://40923148.github.io/wcm2021">40923148 web</a> | <a href="https://github.com/40923148/wcm2021">40923148 repo</a> | <a href="https://40923148.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923148/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923111.github.io/wcm2021">40923111 web</a> | <a href="https://github.com/40923111/wcm2021">40923111 repo</a> | <a href="https://40923111.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923111/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923116.github.io/wcm2021">40923116 web</a> | <a href="https://github.com/40923116/wcm2021">40923116 repo</a> | <a href="https://40923116.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923116/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923122.github.io/wcm2021">40923122 web</a> | <a href="https://github.com/40923122/wcm2021">40923122 repo</a> | <a href="https://40923122.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923122/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923109.github.io/wcm2021">40923109 web</a> | <a href="https://github.com/40923109/wcm2021">40923109 repo</a> | <a href="https://40923109.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923109/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923146.github.io/wcm2021">40923146 web</a> | <a href="https://github.com/40923146/wcm2021">40923146 repo</a> | <a href="https://40923146.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923146/wcm2021-ag4">grp repo</a> <br/> wcm2021-ag5<br/> <a href="https://40923127.github.io/wcm2021">40923127 web</a> | <a href="https://github.com/40923127/wcm2021">40923127 repo</a> | <a href="https://40923127.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923127/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923128.github.io/wcm2021">40923128 web</a> | <a href="https://github.com/40923128/wcm2021">40923128 repo</a> | <a href="https://40923128.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923128/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923125.github.io/wcm2021">40923125 web</a> | <a href="https://github.com/40923125/wcm2021">40923125 repo</a> | <a href="https://40923125.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923125/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923136.github.io/wcm2021">40923136 web</a> | <a href="https://github.com/40923136/wcm2021">40923136 repo</a> | <a href="https://40923136.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923136/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923124.github.io/wcm2021">40923124 web</a> | <a href="https://github.com/40923124/wcm2021">40923124 repo</a> | <a href="https://40923124.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923124/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923126-1.github.io/wcm2021">40923126 web</a> | <a href="https://github.com/40923126-1/wcm2021">40923126 repo</a> | <a href="https://40923126-1.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923126-1/wcm2021-ag5">grp repo</a> <br/> wcm2021-ag6<br/> <a href="https://s40723240.github.io/wcm2021">40723240 web</a> | <a href="https://github.com/s40723240/wcm2021">40723240 repo</a> | <a href="https://s40723240.github.io/wcm2021-ag6">grp web</a> | <a href="https://github.com/s40723240/wcm2021-ag6">grp repo</a> <br/> <a href="https://s40723238.github.io/wcm2021">40723238 web</a> | <a href="https://github.com/s40723238/wcm2021">40723238 repo</a> | <a href="https://s40723238.github.io/wcm2021-ag6">grp web</a> | <a href="https://github.com/s40723238/wcm2021-ag6">grp repo</a> <br/> wcm2021-ag7<br/> <a href="https://40523923.github.io/wcm2021">40523923 web</a> | <a href="https://github.com/40523923/wcm2021">40523923 repo</a> | <a href="https://40523923.github.io/wcm2021-ag7">grp web</a> | <a href="https://github.com/40523923/wcm2021-ag7">grp repo</a> <br/> <a href="https://40523148.github.io/wcm2021">40523148 web</a> | <a href="https://github.com/40523148/wcm2021">40523148 repo</a> | <a href="https://40523148.github.io/wcm2021-ag7">grp web</a> | <a href="https://github.com/40523148/wcm2021-ag7">grp repo</a> <br/> wcm2021-ag8<br/> <a href="https://40923117.github.io/wcm2021">40923117 web</a> | <a href="https://github.com/40923117/wcm2021">40923117 repo</a> | <a href="https://40923117.github.io/wcm2021-ag8">grp web</a> | <a href="https://github.com/40923117/wcm2021-ag8">grp repo</a> <br/> <a href="https://40923120.github.io/wcm2021">40923120 web</a> | <a href="https://github.com/40923120/wcm2021">40923120 repo</a> | <a href="https://40923120.github.io/wcm2021-ag8">grp web</a> | <a href="https://github.com/40923120/wcm2021-ag8">grp repo</a> <br/> <a href="https://40923119.github.io/wcm2021">40923119 web</a> | <a href="https://github.com/40923119/wcm2021">40923119 repo</a> | <a href="https://40923119.github.io/wcm2021-ag8">grp web</a> | <a href="https://github.com/40923119/wcm2021-ag8">grp repo</a> <br/> wcm2021-ag9<br/> wcm2021-ag10</p>
 <p></p>
 <h2>w15</h2>
@@ -700,7 +714,8 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>將13~15周所做的事情推到<a href="https://github.com/mdecourse/wcm2021/discussions/19">https://github.com/mdecourse/wcm2021/discussions/19</a></p>
 <p>完成fossil倉儲推送<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/8PDsPCRjCXE" width="560"></iframe></p>
 <p>fossil推送<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/FYjGbGHYVHQ" width="560"></iframe></p>
-<p></p><h3>作業</h3>
+<p></p>
+<h3>作業</h3>
 <p>16~18周功課布置<span>完成兩台 Heroku 平台上的虛擬主機</span></p>
 <h4><span>主機一: 利用 Heroku 呈現靜態網頁內容.</span></h4>
 <p>此一網站必須包含個人學習心得, 上課過程的筆記, 以及下列各 H1 頁面, 其他 H2 與 H3 頁面由各學員視實際需要自行加入:</p>
