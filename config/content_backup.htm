@@ -1,7 +1,466 @@
 <h1>First</h1>
 <p></p>
+<h1><span>網路環境</span></h1>
+<h1><span>Heroku 網站</span></h1>
+<p>heroku:<a href="https://s40923148.herokuapp.com/content/index.html">https://s40923148.herokuapp.com/content/index.html</a></p>
+<p>           <span> </span><a href="https://a40923148.herokuapp.com/">https://a40923148.herokuapp.com/</a></p>
+<h1><span>網路直播</span></h1>
+<h2>OBS</h2>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/bbnm4YSx6Q4" width="560"></iframe></p>
+<h1><span>動態網站</span></h1>
+<h1><span>RoboDK 執行</span></h1>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/x3Dab0MNV5Q" width="560"></iframe></p>
+<h3>第一題</h3>
+<p><strong><a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></strong></p>
+<p>1.可攜程式系統的命令列視窗輸入 (pip install robodk) 要連結robodk</p>
+<p>2.開啟robodk(記得要前往 工具/選項/其他/打勾允許外部API並且輸入目前電腦網路IP</p>
+<p>ip查詢:ipconfig /all</p>
+<p>3.pick_and_place (題目資料夾)  除程式碼(.py)都拉近robodk</p>
+<p>4.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">:: cd Python
+
+:: Install RoboDK API
+python.exe -m pip install  "./Python/." -I
+
+:: Install pylint (linting for VScode)
+python.exe -m pip install "pylint&gt;=2.3" --retries=2
+
+:: Install rope (easy variable renaming in VScode)
+python.exe -m pip install "rope&gt;=0.14" --retries=2
+
+:: Display all installed packages
+python.exe Python_Versions.py
+
+pause</pre>
+<p>5.pick_and_place.py用SCITE啟動(啟動前注意ip有沒有出錯)(題目資料夾)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># KMOLab Portable RoboDK pick and place
+from robolink import *    # API to communicate with robodk
+from robodk import *      # robodk robotics toolbox
+
+# Setup global parameters
+BALL_DIAMETER = 100 # diameter of one ball
+APPROACH = 100      # approach distance to grab each part, in mm
+nTCPs = 6           # number of TCP's in the tool
+
+#----------------------------------------------
+# Function definitions
+
+def box_calc(BALLS_SIDE=4, BALLS_MAX=None):
+    """Calculate a list of points (ball center) as if the balls were stored in a box"""
+    if BALLS_MAX is None: BALLS_MAX = BALLS_SIDE**3
+    xyz_list = []
+    for h in range(BALLS_SIDE):
+        for i in range(BALLS_SIDE):
+            for j in range(BALLS_SIDE):
+                xyz_list = xyz_list + [[(i+0.5)*BALL_DIAMETER, (j+0.5)*BALL_DIAMETER, (h+0.5)*BALL_DIAMETER]]
+                if len(xyz_list) &gt;= BALLS_MAX:
+                    return xyz_list
+    return xyz_list
+
+def pyramid_calc(BALLS_SIDE=4):
+    """Calculate a list of points (ball center) as if the balls were place in a pyramid"""
+    #the number of balls can be calculated as: int(BALLS_SIDE*(BALLS_SIDE+1)*(2*BALLS_SIDE+1)/6)
+    BALL_DIAMETER = 100
+    xyz_list = []
+    sqrt2 = 2**(0.5)
+    for h in range(BALLS_SIDE):
+        for i in range(BALLS_SIDE-h):
+            for j in range(BALLS_SIDE-h):
+                height = h*BALL_DIAMETER/sqrt2 + BALL_DIAMETER/2
+                xyz_list = xyz_list + [[i*BALL_DIAMETER + (h+1)*BALL_DIAMETER*0.5, j*BALL_DIAMETER + (h+1)*BALL_DIAMETER*0.5, height]]
+    return xyz_list
+
+def balls_setup(frame, positions):
+    """Place a list of balls in a reference frame. The reference object (ball) must have been previously copied to the clipboard."""
+    nballs = len(positions)
+    step = 1.0/(nballs - 1)
+    for i in range(nballs):
+        newball = frame.Paste()
+        newball.setName('ball ' + str(i)) #set item name
+        newball.setPose(transl(positions[i])) #set item position with respect to parent
+        newball.setVisible(True, False) #make item visible but hide the reference frame
+        newball.Recolor([1-step*i, step*i, 0.2, 1]) #set RGBA color
+
+def cleanup_balls(parentnodes):
+    """Delete all child items whose name starts with \"ball\", from the provided list of parent items."""
+    todelete = []
+    for item in parentnodes:
+        todelete = todelete + item.Childs()
+
+    for item in todelete:
+        if item.Name().startswith('ball'):
+            item.Delete()
+
+def TCP_On(toolitem, tcp_id):
+    """Attach the closest object to the toolitem Htool pose,
+    furthermore, it will output appropriate function calls on the generated robot program (call to TCP_On)"""
+    toolitem.AttachClosest()
+    toolitem.RDK().RunMessage('Set air valve %i on' % (tcp_id+1))
+    toolitem.RDK().RunProgram('TCP_On(%i)' % (tcp_id+1));
+        
+def TCP_Off(toolitem, tcp_id, itemleave=0):
+    """Detaches the closest object attached to the toolitem Htool pose,
+    furthermore, it will output appropriate function calls on the generated robot program (call to TCP_Off)"""
+    toolitem.DetachAll(itemleave)
+    toolitem.RDK().RunMessage('Set air valve %i off' % (tcp_id+1))
+    toolitem.RDK().RunProgram('TCP_Off(%i)' % (tcp_id+1));
+
+
+#----------------------------------------------------------
+# The program starts here:
+
+# Any interaction with RoboDK must be done through RDK:
+RDK = Robolink(robodk_path="C:/robodk\robodk522_portable/bin/RoboDK.exe", robodk_ip='192.168.1.111')
+
+# Turn off automatic rendering (faster)
+RDK.Render(False)
+
+#RDK.Set_Simulation_Speed(500); # set the simulation speed
+
+# Gather required items from the station tree
+robot = RDK.Item('Fanuc M-710iC/50')
+robot_tools = robot.Childs()
+#robottool = RDK.Item('MainTool')
+frame1 = RDK.Item('Table 1')
+frame2 = RDK.Item('Table 2')
+
+# Copy a ball as an object (same as CTRL+C)
+ballref = RDK.Item('reference ball')
+ballref.Copy()
+
+# Run a pre-defined station program (in RoboDK) to replace the two tables
+prog_reset = RDK.Item('Replace objects')
+prog_reset.RunProgram()
+
+# Call custom procedure to remove old objects
+cleanup_balls([frame1, frame2])
+
+# Make a list of positions to place the objects
+frame1_list = pyramid_calc(4)
+frame2_list = pyramid_calc(4)
+
+# Programmatically place the objects with a custom-made procedure
+balls_setup(frame1, frame1_list)
+
+# Delete previously generated tools
+for tool in robot_tools:
+    if tool.Name().startswith('TCP'):
+        tool.Delete()
+        
+# Calculate tool frames for the suction cup tool of 6 suction cups
+TCP_list = []
+for i in range(nTCPs):
+    TCPi_pose = transl(0,0,100)*rotz((360/nTCPs)*i*pi/180)*transl(125,0,0)*roty(pi/2)
+    TCPi = robot.AddTool(TCPi_pose, 'TCP %i' % (i+1))
+    TCP_list.append(TCPi)
+
+TCP_0 = TCP_list[0]
+
+# Turn on automatic rendering
+RDK.Render(True)
+
+# Move balls    
+robot.setPoseTool(TCP_list[0])
+nballs_frame1 = len(frame1_list)
+nballs_frame2 = len(frame2_list)
+idTake = nballs_frame1 - 1
+idLeave = 0
+idTCP = 0
+target_app_frame = transl(2*BALL_DIAMETER, 2*BALL_DIAMETER, 4*BALL_DIAMETER)*roty(pi)*transl(0,0,-APPROACH)
+
+while idTake &gt;= 0:
+    # ------------------------------------------------------------------
+    # first priority: grab as many balls as possible
+    # the tool is empty at this point, so take as many balls as possible (up to a maximum of 6 -&gt; nTCPs)
+    ntake = min(nTCPs, idTake + 1)
+
+    # approach to frame 1
+    robot.setPoseFrame(frame1)
+    robot.setPoseTool(TCP_0)
+    robot.MoveJ([0,0,0,0,10,-200])
+    robot.MoveJ(target_app_frame)
+
+    # grab ntake balls from frame 1
+    for i in range(ntake):
+        TCPi = TCP_list[i]
+        robot.setPoseTool(TCPi)
+        # calculate target wrt frame1: rotation about Y is needed since Z and X axis are inverted
+        target = transl(frame1_list[idTake])*roty(pi)*rotx(30*pi/180)
+        target_app = target*transl(0,0,-APPROACH)
+        idTake = idTake - 1        
+        robot.MoveL(target_app)
+        robot.MoveL(target)
+        TCP_On(TCPi, i)
+        robot.MoveL(target_app)
+ 
+    # ------------------------------------------------------------------
+    # second priority: unload the tool     
+    # approach to frame 2 and place the tool balls into table 2
+    robot.setPoseTool(TCP_0)
+    robot.MoveJ(target_app_frame)
+    robot.MoveJ([0,0,0,0,10,-200])
+    robot.setPoseFrame(frame2)    
+    robot.MoveJ(target_app_frame)
+    for i in range(ntake):
+        TCPi = TCP_list[i]
+        robot.setPoseTool(TCPi)
+        if idLeave &gt; nballs_frame2-1:
+            raise Exception("No room left to place objects in Table 2")
+        
+        # calculate target wrt frame1: rotation of 180 about Y is needed since Z and X axis are inverted
+        target = transl(frame2_list[idLeave])*roty(pi)*rotx(30*pi/180)
+        target_app = target*transl(0,0,-APPROACH)
+        idLeave = idLeave + 1        
+        robot.MoveL(target_app)
+        robot.MoveL(target)
+        TCP_Off(TCPi, i, frame2)
+        robot.MoveL(target_app)
+
+    robot.MoveJ(target_app_frame)
+
+# Move home when the robot finishes
+robot.MoveJ([0,0,0,0,10,-200])
+</pre>
+<p></p>
+<h3>第二題</h3>
+<p><a href="https://drive.google.com/file/d/11GFhWqvkCswY2KbLOPB7vRT0EvoiKpdU/view?usp=sharing">pick and place final 專案下載</a></p>
+<p>1.關閉robodk(沒開就跳過)</p>
+<p>2.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">:: cd Python
+
+:: Install RoboDK API
+python.exe -m pip install  "./Python/." -I
+
+:: Install pylint (linting for VScode)
+python.exe -m pip install "pylint&gt;=2.3" --retries=2
+
+:: Install rope (easy variable renaming in VScode)
+python.exe -m pip install "rope&gt;=0.14" --retries=2
+
+:: Display all installed packages
+python.exe Python_Versions.py
+
+pause</pre>
+<p>3.pick_and_place_using_python_api.py用SCITE啟動(注意路徑要改成電腦robodk真正的路徑)</p>
+<p>(題目資料夾)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from robolink import *
+from robodk import *
+ 
+import os
+ 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+print(dir_path)
+# Calculate pyramid coordinate
+ 
+# Setup global parameters
+BALL_DIAMETER = 100 # diameter of one ball
+APPROACH = 100      # approach distance to grab each part, in mm
+nTCPs = 6           # number of TCP's in the tool
+ 
+def pyramid_calc(BALLS_SIDE=4):
+    """Calculate a list of points (ball center) as if the balls were place in a pyramid"""
+    #the number of balls can be calculated as: int(BALLS_SIDE*(BALLS_SIDE+1)*(2*BALLS_SIDE+1)/6)
+    #BALL_DIAMETER = 100
+    xyz_list = []
+    sqrt2 = 2**(0.5)
+    for h in range(BALLS_SIDE):
+        for i in range(BALLS_SIDE-h):
+            for j in range(BALLS_SIDE-h):
+                height = h*BALL_DIAMETER/sqrt2 + BALL_DIAMETER/2
+                xyz_list = xyz_list + [[i*BALL_DIAMETER + (h+1)*BALL_DIAMETER*0.5, j*BALL_DIAMETER + (h+1)*BALL_DIAMETER*0.5, height]]
+    return xyz_list
+     
+def TCP_On(toolitem, tcp_id):
+    """Attach the closest object to the toolitem Htool pose,
+    furthermore, it will output appropriate function calls on the generated robot program (call to TCP_On)"""
+    toolitem.AttachClosest()
+    toolitem.RDK().RunMessage('Set air valve %i on' % (tcp_id+1))
+    toolitem.RDK().RunProgram('TCP_On(%i)' % (tcp_id+1));
+         
+def TCP_Off(toolitem, tcp_id, itemleave=0):
+    """Detaches the closest object attached to the toolitem Htool pose,
+    furthermore, it will output appropriate function calls on the generated robot program (call to TCP_Off)"""
+    toolitem.DetachAll(itemleave)
+    toolitem.RDK().RunMessage('Set air valve %i off' % (tcp_id+1))
+    toolitem.RDK().RunProgram('TCP_Off(%i)' % (tcp_id+1));
+ 
+# Make a list of positions to place the objects
+balls_list = pyramid_calc(4)
+ 
+#print(len(frame1_list))
+# 4*4 = 16
+# 3*3 = 9
+# 2*2 = 4
+# 1+4+9+16 = 30
+ 
+# height 50*sqrt(2)
+'''
+[
+ 
+[50.0, 50.0, 50.0], [50.0, 150.0, 50.0], [50.0, 250.0, 50.0], [50.0, 350.0, 50.0], 
+ 
+[150.0, 50.0, 50.0], [150.0, 150.0, 50.0], [150.0, 250.0, 50.0], [150.0, 350.0, 50.0], 
+ 
+[250.0, 50.0, 50.0], [250.0, 150.0, 50.0], [250.0, 250.0, 50.0], [250.0, 350.0, 50.0], 
+ 
+[350.0, 50.0, 50.0], [350.0, 150.0, 50.0], [350.0, 250.0, 50.0], [350.0, 350.0, 50.0], 
+ 
+ 
+[100.0, 100.0, 120.71067811865474], [100.0, 200.0, 120.71067811865474], [100.0, 300.0, 120.71067811865474], 
+ 
+[200.0, 100.0, 120.71067811865474], [200.0, 200.0, 120.71067811865474], [200.0, 300.0, 120.71067811865474], 
+ 
+[300.0, 100.0, 120.71067811865474], [300.0, 200.0, 120.71067811865474], [300.0, 300.0, 120.71067811865474], 
+ 
+ 
+[150.0, 150.0, 191.42135623730948], [150.0, 250.0, 191.42135623730948], 
+ 
+[250.0, 150.0, 191.42135623730948], [250.0, 250.0, 191.42135623730948], 
+ 
+ 
+[200.0, 200.0, 262.13203435596427]
+ 
+]
+ 
+'''
+# https://github.com/RoboDK/RoboDK-API/blob/master/Python/robolink.py
+# robodk_path variable to specify location of RoboDK.exe
+# under Ubuntu can not use "-NEWINSTANCE"
+'''
+start_robodk.sh content
+LD_LIBRARY_PATH="/home/yen/RoboDK/bin/lib"
+export LD_LIBRARY_PATH
+/home/yen/RoboDK/bin/RoboDK
+'''
+RDK = Robolink(robodk_path=r"C:\robodk\robodk522_portable\bin\RoboDK.exe",args=["-SKIPINI", "-EXIT_LAST_COM"])
+# Add robot and the accompanied Base coordinate
+print(dir_path + '/Fanuc-M-710iC-50.robot')
+# relative directory or absolute directory will work for AddFile under Ubuntu
+#robot = RDK.AddFile(r"/home/yen/github/wcm2021/downloads/robodk/pick_and_place_kmol_mac/Fanuc-M-710iC-50.robot")
+robot = RDK.AddFile('Fanuc-M-710iC-50.robot')
+# Get the default robot base frame
+robot_frame = RDK.Item('Fanuc M-710iC/50 Base')
+# Move the base frame to the origin
+robot_frame.setPose(transl(0,0,0))
+ 
+# Add a tool to an existing robot:
+tool = RDK.AddFile(dir_path + '/MainTool.tool', robot)
+ 
+# Add table 1
+table1_frame = RDK.AddFrame('Table 1')
+table1_frame.setPose(transl(807.766544,-963.699898,41.478944))
+table1_stl = RDK.AddFile(dir_path + '/Table.stl', table1_frame)
+ 
+# Add table 2
+table2_frame = RDK.AddFrame('Table 2')
+table2_frame.setPose(transl(926.465508,337.151529,94.871928))
+table2_stl = RDK.AddFile(dir_path + '/Table.stl', table2_frame)
+      
+# Calculate tool frames for the suction cup tool of 6 suction cups
+TCP_list = []
+for i in range(nTCPs):
+    TCPi_pose = transl(0,0,100)*rotz((360/nTCPs)*i*pi/180)*transl(125,0,0)*roty(pi/2)
+    TCPi = robot.AddTool(TCPi_pose, 'TCP %i' % (i+1))
+    TCP_list.append(TCPi)
+ 
+TCP_0 = TCP_list[0]
+ 
+# Turn on automatic rendering
+RDK.Render(True)
+ 
+# Add balls
+# create a list with 30 elements
+balls = [None for _ in range(30)]
+layer = [16, 9, 4, 1]
+count = 0
+for i in range(len(balls_list)):
+    # transl(balls_list)
+    balls[i] = RDK.AddFile('./ball.stl', table1_frame)
+    balls[i].setPose(transl(balls_list[i]))
+    count = count + 1
+    if count &lt;= 16:
+        balls[i].setColor([1, 0, 0])
+    elif count &gt; 16 and count &lt;= 25:
+        balls[i].setColor([0, 1, 0])
+    elif count &gt; 25 and count &lt;=29:
+        balls[i].setColor([1, 1, 0])
+    else:
+        balls[i].setColor([0, 0, 1])
+ 
+# Make a list of positions to place the objects
+# ball_list is the same as frame1_list
+frame1_list = pyramid_calc(4)
+frame2_list = pyramid_calc(4)
+ 
+# Move balls 
+robot.setPoseTool(TCP_list[0])
+nballs_frame1 = len(frame1_list)
+nballs_frame2 = len(frame2_list)
+idTake = nballs_frame1 - 1
+idLeave = 0
+idTCP = 0
+ 
+target_app_frame = transl(2*BALL_DIAMETER, 2*BALL_DIAMETER, 4*BALL_DIAMETER)*roty(pi)*transl(0,0,-APPROACH)
+ 
+# frame1 is the same as table1_frame
+frame1 = RDK.Item('Table 1')
+frame2 = RDK.Item('Table 2')
+ 
+while idTake &gt;= 0:
+    # ------------------------------------------------------------------
+    # first priority: grab as many balls as possible
+    # the tool is empty at this point, so take as many balls as possible (up to a maximum of 6 -&gt; nTCPs)
+    ntake = min(nTCPs, idTake + 1)
+ 
+    # approach to frame 1
+    robot.setPoseFrame(frame1)
+    robot.setPoseTool(TCP_0)
+    robot.MoveJ([0,0,0,0,10,-200])
+    robot.MoveJ(target_app_frame)
+ 
+    # grab ntake balls from frame1
+    for i in range(ntake):
+        TCPi = TCP_list[i]
+        robot.setPoseTool(TCPi)
+        # calculate target wrt frame1: rotation about Y is needed since Z and X axis are inverted
+        target = transl(frame1_list[idTake])*roty(pi)*rotx(30*pi/180)
+        target_app = target*transl(0,0,-APPROACH)
+        idTake = idTake - 1       
+        robot.MoveL(target_app)
+        robot.MoveL(target)
+        TCP_On(TCPi, i)
+        robot.MoveL(target_app)
+  
+    # ------------------------------------------------------------------
+    # second priority: unload the tool     
+    # approach to frame2 and place the tool balls into table2
+    robot.setPoseTool(TCP_0)
+    robot.MoveJ(target_app_frame)
+    robot.MoveJ([0,0,0,0,10,-200])
+    robot.setPoseFrame(frame2)    
+    robot.MoveJ(target_app_frame)
+    for i in range(ntake):
+        TCPi = TCP_list[i]
+        robot.setPoseTool(TCPi)
+        if idLeave &gt; nballs_frame2-1:
+            raise Exception("No room left to place objects in Table 2")
+ 
+        # calculate target wrt frame1: rotation of 180 about Y is needed since Z and X axis are inverted
+        target = transl(frame2_list[idLeave])*roty(pi)*rotx(30*pi/180)
+        target_app = target*transl(0,0,-APPROACH)
+        idLeave = idLeave + 1       
+        robot.MoveL(target_app)
+        robot.MoveL(target)
+        TCP_Off(TCPi, i, frame2)
+        robot.MoveL(target_app)
+ 
+    robot.MoveJ(target_app_frame)
+ 
+# Move home when the robot finishes
+robot.MoveJ([0,0,0,0,10,-200])</pre>
+<p></p>
 <h1>期中報告</h1>
-<p><br/><br/><br/>期中報告</p>
+<p><br/><br/>期中報告</p>
 <p>組長:張煒中</p>
 <p>組員:周玥辰，方冠勛，吳定隆，周育德，張智程</p>
 <p></p>
@@ -82,7 +541,6 @@
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/w-5Q50NXC90" width="560"></iframe></p>
 <h2>分組教學</h2>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/_HYwFV8Sfkk" width="560"></iframe></p>
-<h3>教學</h3>
 <p>1.fork使自己有組長倉儲</p>
 <p>2.git pull  更新倉儲內容</p>
 <p>3<span>Create pull request  推回組長那邊</span></p>
