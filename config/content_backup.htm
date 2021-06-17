@@ -83,203 +83,10 @@
 <h2>分組教學</h2>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/_HYwFV8Sfkk" width="560"></iframe></p>
 <h2>Robodk</h2>
-<h1>About</h1>
-<p>This is <a href="https://github.com/mdecourse/cmstemplate">https://github.com/mdecourse/cmstemplate</a></p>
-<p><span>網際內容管理 (Web-based Content Management)</span></p>
-<p>利用瀏覽器作為前端, 並將數位內容有系統地送到雲端伺服器中進行管理與運用的架構即稱為網際內容管理.</p>
-<p>從機械設計專業的角度看待網際內容管理.</p>
-<p>機械設計工程師應該從 CAD 出發透過零組件系統建立, 模擬與控制, 並在流程中利用 CAE 進行設計功能確認後, 將所有持續改進的內容透過分散式版次與網際管理系統進行保存與數位資料再利用.</p>
-<h2>語法</h2>
-<p><strong>cms</strong></p>
-<p>老師為了同學方便把cd cmsimde  跟wsgi.py整合在一起，讓同學可以在自己的倉儲直接打開動態網頁。</p>
-<p><strong>acp</strong></p>
-<p>老師把git add .、git commit -m 、git push整合，讓同學可以直接推送，但要注意沒有把這次推送加上代號可能會出錯。</p>
-<p><strong>wsgi.py</strong></p>
-<p>打開動態網頁</p>
-<p><strong><span>git add .</span></strong></p>
-<p><span>找尋更新的內容</span></p>
-<p><strong>git commit -m</strong></p>
-<p>把更新的內容變成一個專案，記得要加上代號</p>
-<p><strong>git push</strong></p>
-<p>把全部的東西推送到遠端</p>
-<p><strong>path</strong></p>
-<p>路徑</p>
-<p><br/><strong>dir</strong></p>
-<p>磁碟內容</p>
-<p><strong>regedit</strong></p>
-<p><strong></strong>登入編輯</p>
-<p><strong>git pull origin master </strong></p>
-<p>更新到最新的資料</p>
-<p><strong>git clone (github網址).git</strong></p>
-<p>把<span>github倉儲複製到資料夾，以git形式</span></p>
-<p></p>
-<h1>上課內容</h1>
-<h2>w1</h2>
-<p>還未選課沒上到課</p>
-<h2>w2</h2>
-<p><strong>更改標題</strong></p>
-<p><span> </span>cmsimde 編輯及轉靜態網頁有關的認知</p>
-<h2>w3</h2>
-<p><strong>改版</strong></p>
-<p>我上課時要改成最新版結果失敗了，詢問老師後，好像是我有弄壞一部份的靜態，需要從遠端重新抓新的下來，下課後抽時間重新抓了一次，然後又把up_dir資料夾更新，這次沒有跑一大堆錯誤出來，但我看資料夾並沒有上課所說的五個檔案，需要星期四上課再去詢問老師。</p>
-<h2>w4</h2>
-<p>成功的把上禮拜失敗的改版完成了，原因是，git pull指令無法被接受，需要指定哪個檔案(遠端的分支)。</p>
-<p>課表原始碼介紹利用和開啟各個課表的方法(更改那些變數，和必要的變數),回去用ssh跟github連線</p>
-<div class="line number1 index0 alt2"><code class="py keyword"></code>回家後測試使用SSH，結果失敗了，尋找錯誤的方法中。.......</div>
-<h2>w5</h2>
-<p>今天老師上課教我們更新cmsimde，跟如何設定SSH，也讓我知道握哪裡設定錯誤，是之前的錯誤，教學完後還有太多人不懂所以我就去幫同學解決他們發生錯誤的地方</p>
-<h3>SSH</h3>
-<p>1.首先我們需要登入github在自己的帳號中開啟設定，在設定中尋找SSH and GPG keys ，然後先按New SSHkey做準備。</p>
-<p>2.在 start_ipv6.bat (編輯器)加入<span> </span><span>set GIT_SSH=%Disk%:\putty\plink.exe。</span></p>
-<p><span>3.開啟 Putty 目錄中的 puttygen.exe,(沒有putty從a.kmol.info:88下載)，點擊Generate下載新Key(移動滑鼠進度條才會動)，最上面出現的亂碼為新鑰匙，全選後丟進剛剛在github預備的New SSHkey(記得存)，記得用SciTE 編輯儲存鑰匙(_rsa 檔)，然後用Save private key再存一次(.ppk檔)，兩個檔案存在tmp/keys裡</span></p>
-<p>4.開啟<span>putty.exe建立一個 session用於以 ssh 協定連線到 github.com(在hostname),名稱可任意但Proxy須設定學校的(筆電不用Proxy可以選None)，Auth記得選之前儲存.ppk的檔案，最後回開頭存檔</span></p>
-<p>5.最後則是要修改tmp/wcm2021/.git裡面config的url(之前的可在前面加#即可)，url改成git@(<span>session的名子)</span>:(帳號)/(倉儲名子).git(原url下面)(是origin下面的url)</p>
-<p>名子盡量相同會增加成功率，失敗就多試幾次說不定會成功</p>
-<p></p>
-<h2>W6</h2>
-<p>今天老師說了SSH的原理嚷我更加了解SSH的運作方式，雖然我依舊不明白相同的動作，有時候會設定成功有時候不行的原因是甚麼。</p>
-<p>還有註冊heroku跟把<a href="/a.kmol.info:88">a.kmol.info:88</a>的heroku.7z解壓縮到data裡面，在設定<span> start_ipv6.bat (編輯器)heroku的路徑，之後要教得因為時間問題延到下禮拜(Github連結heroku的方法)</span></p>
-<h2>w7</h2>
-<p><span></span>開始準備期中分組報告</p>
-<p>heroku連結到倉儲，需要</p>
-<p>從a.kmol.info:88下載Heroku，放到data下，再用編輯器把啟動器的Heroku路徑打上。</p>
-<p>測試是否有連接上，<span>輸入 heroku version，有出現版本號便成。</span></p>
-<p><span>未出現原因</span></p>
-<p><span>1.編輯器未編寫正確</span></p>
-<p>2.檔案不完整</p>
-<p>完成後推送方法</p>
-<p>1.<code class="py plain">heroku login </code><code class="py keyword">-</code><code class="py plain">i  (<span>以 interactive 模式登入 Heroku)(記得打帳號密碼)</span></code></p>
-<p><span face="monospace" style="font-family: monospace;">2cd到要推送得倉儲</span></p>
-<p><span face="monospace" style="font-family: monospace;">3.<code class="py plain">heroku git:remote </code><code class="py keyword">-</code><code class="py plain">a s40923148(自己的)</code><code class="py plain"> (<span>針對已經登入的 Heroku 帳號下的 s40923148 app, 設為此倉儲的 remote 同步倉儲</span></code></span></p>
-<p><span face="monospace" style="font-family: monospace;"><code class="py plain"><span>4.</span></code></span>git add .</p>
-<p>5.git commit -am "make it better"</p>
-<pre>6.git push heroku </pre>
-<p><span face="monospace" style="font-family: monospace;"></span></p>
-<p></p>
-<p>編輯器設定</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">path=%Disk%:;%path_python%;%path_portablegit%;%path_heroku%;%path%;</pre>
-<p>路近加上Heroku</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"> set path_heroku=%Disk%:\heroku\bin;</pre>
-<p>標示路徑<br/><br/></p>
-<p>學校電腦需要</p>
-<div class="line number1 index0 alt2"><code class="js plain">REM </code><code class="js keyword">for</code> <code class="js plain">heroku login</code></div>
-<div class="line number2 index1 alt1"><code class="js plain">set HTTP_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
-<div class="line number3 index2 alt2"><code class="js plain">set HTTPS_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
-<p></p>
-<p></p>
-<p></p>
-<p>再次教學如何設定SSH跟解釋</p>
-<h2>w8</h2>
-<p>開始分組報告，要負責把一個github的倉儲推送去heroku，內容要包括機械設計系大樓教室的課表，可以的話把各個樓層都放上按鈕。</p>
-<p><span>教務主機查詢電腦輔助設計室排課時間表的python介紹</span></p>
-<p></p>
-<h3>Heroku</h3>
-<p>1.創新的Heroku，不能用已經推送過的，不然會一直錯誤。</p>
-<p>2.創新的Github，然後把<span> </span><a href="https://github.com/mdecourse/nfulist/blob/master/Procfile">Procfile</a><span>,<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/requirements.txt">requirements.txt</a><span><span> </span>與<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/runtime.txt">runtime.txt</a><span>,<span> ，都推送上去。</span></span></p>
-<p>3.設定wsgi.py(負責打開6~9樓教室課表)(最下面)</p>
-<p>4.最後就是推送，<span>Github跟Heroku，(打開Heroku網址後在網址後加上?<code class="py plain">classroomno </code><code class="py keyword">=</code><span> </span><code class="py string">BGAxxxx可改變教室)</code></span></p>
-<p></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import requests
-import bs4
-# for os.environ and os.system
-import os
-# for geting html file path
-import pathlib
-# 以下因應改為 Heroku based 程式所需導入模組,  修改步驟 1/6
-from flask import Flask, request 
-from flask_cors import CORS
- 
- 
-# 修改步驟 2/6 , 加入 Flask 相關物件設定
-app = Flask(__name__)
-# 此一設定可以讓程式跨網域擷取資料
-CORS(app)
- 
-# for pythn 3.9,  在近端測試時仍需要設定 proxy, 若使用 Python 3.8 執行則會自動使用系統的 Proxy 設定
-proxy = 'http://[2001:288:6004:17::69]:3128'
- 
-os.environ['http_proxy'] = proxy 
-os.environ['HTTP_PROXY'] = proxy
-os.environ['https_proxy'] = proxy
-os.environ['HTTPS_PROXY'] = proxy
-'''
-url:  'jclassroom_ajax.php',
-data: { pselyr: pselyr, pselclssroom: pselclssroom },
-'''
- 
-# 修改步驟 3/6, 試著將程式改為網際模式, 需要套用 Flask 的網際 decorator
-@app.route('/')
-def timeTableList():
-    semester = '1092'
-    classroomno = 'BGA0810'
-    column = True
- 
-    if semester == None:
-        semester = '1092'
-    if classroomno == None:
-        # BGA0810 電腦輔助設計室
-        classroomno = 'BGA0810'
-         
-    headers = {'X-Requested-With': 'XMLHttpRequest'}
- 
-    url = 'https://qry.nfu.edu.tw/jclassroom_ajax.php'
-    post_var = {'pselyr': semester, 'pselclssroom': classroomno}
- 
-    result = requests.post(url, data = post_var, headers = headers)
- 
-    soup = bs4.BeautifulSoup(result.content, 'lxml')
- 
-    # 先除掉所有 anchor
-    for a in soup.findAll('a'):
-        # bs3 語法
-        #a.replaceWithChildren()
-        # bs4 語法, 將標註與內容拆開
-        a.unwrap()
- 
-    # 根據輸出設定, 取出 class='tbcls' 的 table 資料
-    table = soup.find('table', {'class': 'tbcls'})
- 
-    # 重建 table, 設定邊線為 1 pixel
-    output = "&lt;table border='1'&gt;"
- 
-    for i in table.contents:
-        # 利用 replace 復原  
-        output += str(i).replace(" ", " ")
-    output += "&lt;/table&gt;"
-    #print(output)
-    # 修改步驟 5/6 , 因為已經將原先可列印出程式的步驟改為 function, 因此必須以 return 將擷取到的網頁資料傳回
-    return output
-     
-# 修改步驟 4/6 , 因為改寫為網際程式後, 下列將內容存檔並自動呼叫 Firefox 的程式碼不再適用, 必須蓋掉
-'''
-# 將 output 寫入 w1_classroom.html
-fileName = "w1_classroom.html"
-with open(fileName, "w", encoding="utf-8") as file:
-    file.write(output)
-# 利用 os.system() 以 default browser 開啟 w1_class_local.html
-filePath = pathlib.Path(__file__).parent.absolute()
-#print(filePath)
-# set firefox as default browser and start url to open html file
-os.system("start file:///" + str(filePath) + "\\" + fileName)
-'''
- 
-# 修改步驟 6/6, 配合網際程式啟動,  以及 Python 程式執行與納入其他程式執行的特定進行配置
- 
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8080, debug=True)
-</pre>
-<h2>w9</h2>
-<p>自己為自己打分數，我為自己打75分，的原因是我覺得我有認真聽課有把老師交代的作業做完，不懂還特別去找同學請教，相反別人不懂我也有盡心幫忙。</p>
-<p>上台報告，由於我沒做簡報，所以我拿github的倉儲來做報告，因為上面只有我平時對上課的紀錄，跟中老師要求要做的東西，並沒有加以排版所以我報告的十分糟糕。</p>
-<h2>W10  W11</h2>
-<p>生病請病假</p>
-<h2>w12</h2>
-<p>突然生病後兩個禮拜來上課，完全不懂老師在說甚麼，robodk、虛擬網站、FileZillaPortable、Oracle VM VirtualBox一大堆不明白的東西進入腦子，只能勉強記憶下來，回去再好好消化。</p>
-<p>回去想辦法處理robodk看了影片還是完全不懂，只好求助同學跟私訊老師，而虛擬網站之後的只是更加糟糕。</p>
-<h2>w13</h2>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/x3Dab0MNV5Q" width="560"></iframe></p>
 <p>出了一樣作業用python來操作robodk。</p>
 <p></p>
-<p>第一題</p>
+<h3>第一題</h3>
 <p><strong><a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></strong></p>
 <p>1.可攜程式系統的命令列視窗輸入 (pip install robodk) 要連結robodk</p>
 <p>2.開啟robodk(記得要前往 工具/選項/其他/打勾允許外部API並且輸入目前電腦網路IP</p>
@@ -490,8 +297,7 @@ while idTake &gt;= 0:
 # Move home when the robot finishes
 robot.MoveJ([0,0,0,0,10,-200])
 </pre>
-<p></p>
-<h3>第二題</h3>
+<p></p><h3>第二題</h3>
 <p><a href="https://drive.google.com/file/d/11GFhWqvkCswY2KbLOPB7vRT0EvoiKpdU/view?usp=sharing">pick and place final 專案下載</a></p>
 <p>1.關閉robodk(沒開就跳過)</p>
 <p>2.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
@@ -727,7 +533,202 @@ while idTake &gt;= 0:
  
 # Move home when the robot finishes
 robot.MoveJ([0,0,0,0,10,-200])</pre>
-<p><br/><br/></p>
+<p></p>
+<h1>About</h1>
+<p>This is <a href="https://github.com/mdecourse/cmstemplate">https://github.com/mdecourse/cmstemplate</a></p>
+<p><span>網際內容管理 (Web-based Content Management)</span></p>
+<p>利用瀏覽器作為前端, 並將數位內容有系統地送到雲端伺服器中進行管理與運用的架構即稱為網際內容管理.</p>
+<p>從機械設計專業的角度看待網際內容管理.</p>
+<p>機械設計工程師應該從 CAD 出發透過零組件系統建立, 模擬與控制, 並在流程中利用 CAE 進行設計功能確認後, 將所有持續改進的內容透過分散式版次與網際管理系統進行保存與數位資料再利用.</p>
+<h2>語法</h2>
+<p><strong>cms</strong></p>
+<p>老師為了同學方便把cd cmsimde  跟wsgi.py整合在一起，讓同學可以在自己的倉儲直接打開動態網頁。</p>
+<p><strong>acp</strong></p>
+<p>老師把git add .、git commit -m 、git push整合，讓同學可以直接推送，但要注意沒有把這次推送加上代號可能會出錯。</p>
+<p><strong>wsgi.py</strong></p>
+<p>打開動態網頁</p>
+<p><strong><span>git add .</span></strong></p>
+<p><span>找尋更新的內容</span></p>
+<p><strong>git commit -m</strong></p>
+<p>把更新的內容變成一個專案，記得要加上代號</p>
+<p><strong>git push</strong></p>
+<p>把全部的東西推送到遠端</p>
+<p><strong>path</strong></p>
+<p>路徑</p>
+<p><br/><strong>dir</strong></p>
+<p>磁碟內容</p>
+<p><strong>regedit</strong></p>
+<p><strong></strong>登入編輯</p>
+<p><strong>git pull origin master </strong></p>
+<p>更新到最新的資料</p>
+<p><strong>git clone (github網址).git</strong></p>
+<p>把<span>github倉儲複製到資料夾，以git形式</span></p>
+<p></p>
+<h1>上課內容</h1>
+<h2>w1</h2>
+<p>還未選課沒上到課</p>
+<h2>w2</h2>
+<p><strong>更改標題</strong></p>
+<p><span> </span>cmsimde 編輯及轉靜態網頁有關的認知</p>
+<h2>w3</h2>
+<p><strong>改版</strong></p>
+<p>我上課時要改成最新版結果失敗了，詢問老師後，好像是我有弄壞一部份的靜態，需要從遠端重新抓新的下來，下課後抽時間重新抓了一次，然後又把up_dir資料夾更新，這次沒有跑一大堆錯誤出來，但我看資料夾並沒有上課所說的五個檔案，需要星期四上課再去詢問老師。</p>
+<h2>w4</h2>
+<p>成功的把上禮拜失敗的改版完成了，原因是，git pull指令無法被接受，需要指定哪個檔案(遠端的分支)。</p>
+<p>課表原始碼介紹利用和開啟各個課表的方法(更改那些變數，和必要的變數),回去用ssh跟github連線</p>
+<div class="line number1 index0 alt2"><code class="py keyword"></code>回家後測試使用SSH，結果失敗了，尋找錯誤的方法中。.......</div>
+<h2>w5</h2>
+<p>今天老師上課教我們更新cmsimde，跟如何設定SSH，也讓我知道握哪裡設定錯誤，是之前的錯誤，教學完後還有太多人不懂所以我就去幫同學解決他們發生錯誤的地方</p>
+<h3>SSH</h3>
+<p>1.首先我們需要登入github在自己的帳號中開啟設定，在設定中尋找SSH and GPG keys ，然後先按New SSHkey做準備。</p>
+<p>2.在 start_ipv6.bat (編輯器)加入<span> </span><span>set GIT_SSH=%Disk%:\putty\plink.exe。</span></p>
+<p><span>3.開啟 Putty 目錄中的 puttygen.exe,(沒有putty從a.kmol.info:88下載)，點擊Generate下載新Key(移動滑鼠進度條才會動)，最上面出現的亂碼為新鑰匙，全選後丟進剛剛在github預備的New SSHkey(記得存)，記得用SciTE 編輯儲存鑰匙(_rsa 檔)，然後用Save private key再存一次(.ppk檔)，兩個檔案存在tmp/keys裡</span></p>
+<p>4.開啟<span>putty.exe建立一個 session用於以 ssh 協定連線到 github.com(在hostname),名稱可任意但Proxy須設定學校的(筆電不用Proxy可以選None)，Auth記得選之前儲存.ppk的檔案，最後回開頭存檔</span></p>
+<p>5.最後則是要修改tmp/wcm2021/.git裡面config的url(之前的可在前面加#即可)，url改成git@(<span>session的名子)</span>:(帳號)/(倉儲名子).git(原url下面)(是origin下面的url)</p>
+<p>名子盡量相同會增加成功率，失敗就多試幾次說不定會成功</p>
+<p></p>
+<h2>W6</h2>
+<p>今天老師說了SSH的原理嚷我更加了解SSH的運作方式，雖然我依舊不明白相同的動作，有時候會設定成功有時候不行的原因是甚麼。</p>
+<p>還有註冊heroku跟把<a href="/a.kmol.info:88">a.kmol.info:88</a>的heroku.7z解壓縮到data裡面，在設定<span> start_ipv6.bat (編輯器)heroku的路徑，之後要教得因為時間問題延到下禮拜(Github連結heroku的方法)</span></p>
+<h2>w7</h2>
+<p><span></span>開始準備期中分組報告</p>
+<p>heroku連結到倉儲，需要</p>
+<p>從a.kmol.info:88下載Heroku，放到data下，再用編輯器把啟動器的Heroku路徑打上。</p>
+<p>測試是否有連接上，<span>輸入 heroku version，有出現版本號便成。</span></p>
+<p><span>未出現原因</span></p>
+<p><span>1.編輯器未編寫正確</span></p>
+<p>2.檔案不完整</p>
+<p>完成後推送方法</p>
+<p>1.<code class="py plain">heroku login </code><code class="py keyword">-</code><code class="py plain">i  (<span>以 interactive 模式登入 Heroku)(記得打帳號密碼)</span></code></p>
+<p><span face="monospace" style="font-family: monospace;">2cd到要推送得倉儲</span></p>
+<p><span face="monospace" style="font-family: monospace;">3.<code class="py plain">heroku git:remote </code><code class="py keyword">-</code><code class="py plain">a s40923148(自己的)</code><code class="py plain"> (<span>針對已經登入的 Heroku 帳號下的 s40923148 app, 設為此倉儲的 remote 同步倉儲</span></code></span></p>
+<p><span face="monospace" style="font-family: monospace;"><code class="py plain"><span>4.</span></code></span>git add .</p>
+<p>5.git commit -am "make it better"</p>
+<pre>6.git push heroku </pre>
+<p><span face="monospace" style="font-family: monospace;"></span></p>
+<p></p>
+<p>編輯器設定</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">path=%Disk%:;%path_python%;%path_portablegit%;%path_heroku%;%path%;</pre>
+<p>路近加上Heroku</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"> set path_heroku=%Disk%:\heroku\bin;</pre>
+<p>標示路徑<br/><br/></p>
+<p>學校電腦需要</p>
+<div class="line number1 index0 alt2"><code class="js plain">REM </code><code class="js keyword">for</code> <code class="js plain">heroku login</code></div>
+<div class="line number2 index1 alt1"><code class="js plain">set HTTP_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
+<div class="line number3 index2 alt2"><code class="js plain">set HTTPS_PROXY=http:</code><code class="js comments">//[2001:288:6004:17::53]:3128</code></div>
+<p></p>
+<p></p>
+<p></p>
+<p>再次教學如何設定SSH跟解釋</p>
+<h2>w8</h2>
+<p>開始分組報告，要負責把一個github的倉儲推送去heroku，內容要包括機械設計系大樓教室的課表，可以的話把各個樓層都放上按鈕。</p>
+<p><span>教務主機查詢電腦輔助設計室排課時間表的python介紹</span></p>
+<p></p>
+<h3>Heroku</h3>
+<p>1.創新的Heroku，不能用已經推送過的，不然會一直錯誤。</p>
+<p>2.創新的Github，然後把<span> </span><a href="https://github.com/mdecourse/nfulist/blob/master/Procfile">Procfile</a><span>,<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/requirements.txt">requirements.txt</a><span><span> </span>與<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/runtime.txt">runtime.txt</a><span>,<span> ，都推送上去。</span></span></p>
+<p>3.設定wsgi.py(負責打開6~9樓教室課表)(最下面)</p>
+<p>4.最後就是推送，<span>Github跟Heroku，(打開Heroku網址後在網址後加上?<code class="py plain">classroomno </code><code class="py keyword">=</code><span> </span><code class="py string">BGAxxxx可改變教室)</code></span></p>
+<p></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import requests
+import bs4
+# for os.environ and os.system
+import os
+# for geting html file path
+import pathlib
+# 以下因應改為 Heroku based 程式所需導入模組,  修改步驟 1/6
+from flask import Flask, request 
+from flask_cors import CORS
+ 
+ 
+# 修改步驟 2/6 , 加入 Flask 相關物件設定
+app = Flask(__name__)
+# 此一設定可以讓程式跨網域擷取資料
+CORS(app)
+ 
+# for pythn 3.9,  在近端測試時仍需要設定 proxy, 若使用 Python 3.8 執行則會自動使用系統的 Proxy 設定
+proxy = 'http://[2001:288:6004:17::69]:3128'
+ 
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+'''
+url:  'jclassroom_ajax.php',
+data: { pselyr: pselyr, pselclssroom: pselclssroom },
+'''
+ 
+# 修改步驟 3/6, 試著將程式改為網際模式, 需要套用 Flask 的網際 decorator
+@app.route('/')
+def timeTableList():
+    semester = '1092'
+    classroomno = 'BGA0810'
+    column = True
+ 
+    if semester == None:
+        semester = '1092'
+    if classroomno == None:
+        # BGA0810 電腦輔助設計室
+        classroomno = 'BGA0810'
+         
+    headers = {'X-Requested-With': 'XMLHttpRequest'}
+ 
+    url = 'https://qry.nfu.edu.tw/jclassroom_ajax.php'
+    post_var = {'pselyr': semester, 'pselclssroom': classroomno}
+ 
+    result = requests.post(url, data = post_var, headers = headers)
+ 
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+ 
+    # 先除掉所有 anchor
+    for a in soup.findAll('a'):
+        # bs3 語法
+        #a.replaceWithChildren()
+        # bs4 語法, 將標註與內容拆開
+        a.unwrap()
+ 
+    # 根據輸出設定, 取出 class='tbcls' 的 table 資料
+    table = soup.find('table', {'class': 'tbcls'})
+ 
+    # 重建 table, 設定邊線為 1 pixel
+    output = "&lt;table border='1'&gt;"
+ 
+    for i in table.contents:
+        # 利用 replace 復原  
+        output += str(i).replace(" ", " ")
+    output += "&lt;/table&gt;"
+    #print(output)
+    # 修改步驟 5/6 , 因為已經將原先可列印出程式的步驟改為 function, 因此必須以 return 將擷取到的網頁資料傳回
+    return output
+     
+# 修改步驟 4/6 , 因為改寫為網際程式後, 下列將內容存檔並自動呼叫 Firefox 的程式碼不再適用, 必須蓋掉
+'''
+# 將 output 寫入 w1_classroom.html
+fileName = "w1_classroom.html"
+with open(fileName, "w", encoding="utf-8") as file:
+    file.write(output)
+# 利用 os.system() 以 default browser 開啟 w1_class_local.html
+filePath = pathlib.Path(__file__).parent.absolute()
+#print(filePath)
+# set firefox as default browser and start url to open html file
+os.system("start file:///" + str(filePath) + "\\" + fileName)
+'''
+ 
+# 修改步驟 6/6, 配合網際程式啟動,  以及 Python 程式執行與納入其他程式執行的特定進行配置
+ 
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)
+</pre>
+<h2>w9</h2>
+<p>自己為自己打分數，我為自己打75分，的原因是我覺得我有認真聽課有把老師交代的作業做完，不懂還特別去找同學請教，相反別人不懂我也有盡心幫忙。</p>
+<p>上台報告，由於我沒做簡報，所以我拿github的倉儲來做報告，因為上面只有我平時對上課的紀錄，跟中老師要求要做的東西，並沒有加以排版所以我報告的十分糟糕。</p>
+<h2>W10  W11</h2>
+<p>生病請病假</p>
+<h2>w12</h2>
+<p>突然生病後兩個禮拜來上課，完全不懂老師在說甚麼，robodk、虛擬網站、FileZillaPortable、Oracle VM VirtualBox一大堆不明白的東西進入腦子，只能勉強記憶下來，回去再好好消化。</p>
+<p>回去想辦法處理robodk看了影片還是完全不懂，只好求助同學跟私訊老師，而虛擬網站之後的只是更加糟糕。</p>
+<h2>w13</h2>
+<p></p>
 <h2>w14</h2>
 <p>wcm2021-ag1<br/> <a href="https://40923135.github.io/wcm2021">40923135 web</a> | <a href="https://github.com/40923135/wcm2021">40923135 repo</a> | <a href="https://40923135.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923135/wcm2021-ag1">grp repo</a> <br/> <a href="https://40923108.github.io/wcm2021">40923108 web</a> | <a href="https://github.com/40923108/wcm2021">40923108 repo</a> | <a href="https://40923108.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923108/wcm2021-ag1">grp repo</a> <br/> <a href="https://40923101.github.io/wcm2021">40923101 web</a> | <a href="https://github.com/40923101/wcm2021">40923101 repo</a> | <a href="https://40923101.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923101/wcm2021-ag1">grp repo</a> <br/> <a href="https://40923142.github.io/wcm2021">40923142 web</a> | <a href="https://github.com/40923142/wcm2021">40923142 repo</a> | <a href="https://40923142.github.io/wcm2021-ag1">grp web</a> | <a href="https://github.com/40923142/wcm2021-ag1">grp repo</a> <br/> wcm2021-ag2<br/> <a href="https://40923105.github.io/wcm2021">40923105 web</a> | <a href="https://github.com/40923105/wcm2021">40923105 repo</a> | <a href="https://40923105.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923105/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923104.github.io/wcm2021">40923104 web</a> | <a href="https://github.com/40923104/wcm2021">40923104 repo</a> | <a href="https://40923104.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923104/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923107.github.io/wcm2021">40923107 web</a> | <a href="https://github.com/40923107/wcm2021">40923107 repo</a> | <a href="https://40923107.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923107/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923110.github.io/wcm2021">40923110 web</a> | <a href="https://github.com/40923110/wcm2021">40923110 repo</a> | <a href="https://40923110.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923110/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923102.github.io/wcm2021">40923102 web</a> | <a href="https://github.com/40923102/wcm2021">40923102 repo</a> | <a href="https://40923102.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923102/wcm2021-ag2">grp repo</a> <br/> <a href="https://40923106.github.io/wcm2021">40923106 web</a> | <a href="https://github.com/40923106/wcm2021">40923106 repo</a> | <a href="https://40923106.github.io/wcm2021-ag2">grp web</a> | <a href="https://github.com/40923106/wcm2021-ag2">grp repo</a> <br/> wcm2021-ag3<br/> <a href="https://40923123.github.io/wcm2021">40923123 web</a> | <a href="https://github.com/40923123/wcm2021">40923123 repo</a> | <a href="https://40923123.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923123/wcm2021-ag3">grp repo</a> <br/> <a href="https://40923151.github.io/wcm2021">40923151 web</a> | <a href="https://github.com/40923151/wcm2021">40923151 repo</a> | <a href="https://40923151.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923151/wcm2021-ag3">grp repo</a> <br/> <a href="https://40923139.github.io/wcm2021">40923139 web</a> | <a href="https://github.com/40923139/wcm2021">40923139 repo</a> | <a href="https://40923139.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923139/wcm2021-ag3">grp repo</a> <br/> <a href="https://40923147.github.io/wcm2021">40923147 web</a> | <a href="https://github.com/40923147/wcm2021">40923147 repo</a> | <a href="https://40923147.github.io/wcm2021-ag3">grp web</a> | <a href="https://github.com/40923147/wcm2021-ag3">grp repo</a> <br/> wcm2021-ag4<br/> <a href="https://40923148.github.io/wcm2021">40923148 web</a> | <a href="https://github.com/40923148/wcm2021">40923148 repo</a> | <a href="https://40923148.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923148/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923111.github.io/wcm2021">40923111 web</a> | <a href="https://github.com/40923111/wcm2021">40923111 repo</a> | <a href="https://40923111.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923111/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923116.github.io/wcm2021">40923116 web</a> | <a href="https://github.com/40923116/wcm2021">40923116 repo</a> | <a href="https://40923116.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923116/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923122.github.io/wcm2021">40923122 web</a> | <a href="https://github.com/40923122/wcm2021">40923122 repo</a> | <a href="https://40923122.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923122/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923109.github.io/wcm2021">40923109 web</a> | <a href="https://github.com/40923109/wcm2021">40923109 repo</a> | <a href="https://40923109.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923109/wcm2021-ag4">grp repo</a> <br/> <a href="https://40923146.github.io/wcm2021">40923146 web</a> | <a href="https://github.com/40923146/wcm2021">40923146 repo</a> | <a href="https://40923146.github.io/wcm2021-ag4">grp web</a> | <a href="https://github.com/40923146/wcm2021-ag4">grp repo</a> <br/> wcm2021-ag5<br/> <a href="https://40923127.github.io/wcm2021">40923127 web</a> | <a href="https://github.com/40923127/wcm2021">40923127 repo</a> | <a href="https://40923127.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923127/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923128.github.io/wcm2021">40923128 web</a> | <a href="https://github.com/40923128/wcm2021">40923128 repo</a> | <a href="https://40923128.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923128/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923125.github.io/wcm2021">40923125 web</a> | <a href="https://github.com/40923125/wcm2021">40923125 repo</a> | <a href="https://40923125.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923125/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923136.github.io/wcm2021">40923136 web</a> | <a href="https://github.com/40923136/wcm2021">40923136 repo</a> | <a href="https://40923136.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923136/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923124.github.io/wcm2021">40923124 web</a> | <a href="https://github.com/40923124/wcm2021">40923124 repo</a> | <a href="https://40923124.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923124/wcm2021-ag5">grp repo</a> <br/> <a href="https://40923126-1.github.io/wcm2021">40923126 web</a> | <a href="https://github.com/40923126-1/wcm2021">40923126 repo</a> | <a href="https://40923126-1.github.io/wcm2021-ag5">grp web</a> | <a href="https://github.com/40923126-1/wcm2021-ag5">grp repo</a> <br/> wcm2021-ag6<br/> <a href="https://s40723240.github.io/wcm2021">40723240 web</a> | <a href="https://github.com/s40723240/wcm2021">40723240 repo</a> | <a href="https://s40723240.github.io/wcm2021-ag6">grp web</a> | <a href="https://github.com/s40723240/wcm2021-ag6">grp repo</a> <br/> <a href="https://s40723238.github.io/wcm2021">40723238 web</a> | <a href="https://github.com/s40723238/wcm2021">40723238 repo</a> | <a href="https://s40723238.github.io/wcm2021-ag6">grp web</a> | <a href="https://github.com/s40723238/wcm2021-ag6">grp repo</a> <br/> wcm2021-ag7<br/> <a href="https://40523923.github.io/wcm2021">40523923 web</a> | <a href="https://github.com/40523923/wcm2021">40523923 repo</a> | <a href="https://40523923.github.io/wcm2021-ag7">grp web</a> | <a href="https://github.com/40523923/wcm2021-ag7">grp repo</a> <br/> <a href="https://40523148.github.io/wcm2021">40523148 web</a> | <a href="https://github.com/40523148/wcm2021">40523148 repo</a> | <a href="https://40523148.github.io/wcm2021-ag7">grp web</a> | <a href="https://github.com/40523148/wcm2021-ag7">grp repo</a> <br/> wcm2021-ag8<br/> <a href="https://40923117.github.io/wcm2021">40923117 web</a> | <a href="https://github.com/40923117/wcm2021">40923117 repo</a> | <a href="https://40923117.github.io/wcm2021-ag8">grp web</a> | <a href="https://github.com/40923117/wcm2021-ag8">grp repo</a> <br/> <a href="https://40923120.github.io/wcm2021">40923120 web</a> | <a href="https://github.com/40923120/wcm2021">40923120 repo</a> | <a href="https://40923120.github.io/wcm2021-ag8">grp web</a> | <a href="https://github.com/40923120/wcm2021-ag8">grp repo</a> <br/> <a href="https://40923119.github.io/wcm2021">40923119 web</a> | <a href="https://github.com/40923119/wcm2021">40923119 repo</a> | <a href="https://40923119.github.io/wcm2021-ag8">grp web</a> | <a href="https://github.com/40923119/wcm2021-ag8">grp repo</a> <br/> wcm2021-ag9<br/> wcm2021-ag10</p>
 <h3>教學</h3>
