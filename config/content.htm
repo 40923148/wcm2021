@@ -4,17 +4,7 @@
 <p><span>在學校:</span></p>
 <p><span>在家裡:</span></p>
 <h1>Heroku 網站</h1>
-<p>heroku:<a href="https://s40923148.herokuapp.com/content/index.html">https://s40923148.herokuapp.com/content/index.html</a></p>
-<p>           </p>
-<h1>網路直播</h1>
-<p>OBS</p>
-<p>注意:</p>
-<p>1.youtube第一次直播至少需要一天準備</p>
-<p>2.設定裡確定串流金要與youtube相同</p>
-<p>3.來源要設定清楚</p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/bbnm4YSx6Q4" width="560"></iframe></p><h1>動態網站</h1>
-<p><span><a href="https://a40923148.herokuapp.com/">https://a40923148.herokuapp.com/</a></span></p>
-<p><span></span></p>
+<p>靜態heroku:<a href="https://s40923148.herokuapp.com/content/index.html">https://s40923148.herokuapp.com/content/index.html</a></p>
 <p>1.<span>進入 </span><a href="https://heroku.com/">https://heroku.com</a><span>, 利用學校配發的 @gm 登記一個 Heroku 帳號, 關鍵在於密碼設定必須要至少 8 個字元, 且字元中必須包含符號, 英文字母及數字,  並且登記後要進入 @gm 帳號進行確認後才能開通 Heroku 帳號.</span></p>
 <p>2.建立一個新的倉儲如:s409231xx</p>
 <p>3.下載<span>Heroku cli 程式檔案, 解開至隨身碟</span></p>
@@ -24,7 +14,115 @@
 <p>6.heroku login<span> </span>-i <span>以 interactive 模式登入 Heroku, 完成後產生 y:\home_ipv6\_netrc</span></p>
 <p>7.設定同步倉儲  heroku git:remote -a s409231xx</p>
 <p>8.</p>
-<p>           </p><h1>RoboDK 執行</h1>
+<p>           </p>
+<h1>網路直播</h1>
+<p>OBS</p>
+<p>注意:</p>
+<p>1.youtube第一次直播至少需要一天準備</p>
+<p>2.設定裡確定串流金要與youtube相同</p>
+<p>3.來源要設定清楚</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/bbnm4YSx6Q4" width="560"></iframe></p>
+<h1>動態網站</h1>
+<p><span>動態heroku<a href="https://a40923148.herokuapp.com/">https://a40923148.herokuapp.com/</a></span></p>
+<p>1.創新的Heroku，不能用已經推送過的，不然會一直錯誤。</p>
+<p>2.創新的Github，然後把<span> </span><a href="https://github.com/mdecourse/nfulist/blob/master/Procfile">Procfile</a><span>,<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/requirements.txt">requirements.txt</a><span><span> </span>與<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/runtime.txt">runtime.txt</a><span>,<span> ，都推送上去。</span></span></p>
+<p>3.設定wsgi.py(負責打開6~9樓教室課表)(最下面)</p>
+<p>4.最後就是推送，<span>Github跟Heroku，(打開Heroku網址後在網址後加上?<code class="py plain">classroomno<span> </span></code><code class="py keyword">=</code><span><span> </span></span><code class="py string">BGAxxxx可改變教室)</code></span></p>
+<p></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import requests
+import bs4
+# for os.environ and os.system
+import os
+# for geting html file path
+import pathlib
+# 以下因應改為 Heroku based 程式所需導入模組,  修改步驟 1/6
+from flask import Flask, request 
+from flask_cors import CORS
+ 
+ 
+# 修改步驟 2/6 , 加入 Flask 相關物件設定
+app = Flask(__name__)
+# 此一設定可以讓程式跨網域擷取資料
+CORS(app)
+ 
+# for pythn 3.9,  在近端測試時仍需要設定 proxy, 若使用 Python 3.8 執行則會自動使用系統的 Proxy 設定
+proxy = 'http://[2001:288:6004:17::69]:3128'
+ 
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+'''
+url:  'jclassroom_ajax.php',
+data: { pselyr: pselyr, pselclssroom: pselclssroom },
+'''
+ 
+# 修改步驟 3/6, 試著將程式改為網際模式, 需要套用 Flask 的網際 decorator
+@app.route('/')
+def timeTableList():
+    semester = '1092'
+    classroomno = 'BGA0810'
+    column = True
+ 
+    if semester == None:
+        semester = '1092'
+    if classroomno == None:
+        # BGA0810 電腦輔助設計室
+        classroomno = 'BGA0810'
+         
+    headers = {'X-Requested-With': 'XMLHttpRequest'}
+ 
+    url = 'https://qry.nfu.edu.tw/jclassroom_ajax.php'
+    post_var = {'pselyr': semester, 'pselclssroom': classroomno}
+ 
+    result = requests.post(url, data = post_var, headers = headers)
+ 
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+ 
+    # 先除掉所有 anchor
+    for a in soup.findAll('a'):
+        # bs3 語法
+        #a.replaceWithChildren()
+        # bs4 語法, 將標註與內容拆開
+        a.unwrap()
+ 
+    # 根據輸出設定, 取出 class='tbcls' 的 table 資料
+    table = soup.find('table', {'class': 'tbcls'})
+ 
+    # 重建 table, 設定邊線為 1 pixel
+    output = "&lt;table border='1'&gt;"
+ 
+    for i in table.contents:
+        # 利用 replace 復原  
+        output += str(i).replace(" ", " ")
+    output += "&lt;/table&gt;"
+    #print(output)
+    # 修改步驟 5/6 , 因為已經將原先可列印出程式的步驟改為 function, 因此必須以 return 將擷取到的網頁資料傳回
+    return output
+     
+# 修改步驟 4/6 , 因為改寫為網際程式後, 下列將內容存檔並自動呼叫 Firefox 的程式碼不再適用, 必須蓋掉
+'''
+# 將 output 寫入 w1_classroom.html
+fileName = "w1_classroom.html"
+with open(fileName, "w", encoding="utf-8") as file:
+    file.write(output)
+# 利用 os.system() 以 default browser 開啟 w1_class_local.html
+filePath = pathlib.Path(__file__).parent.absolute()
+#print(filePath)
+# set firefox as default browser and start url to open html file
+os.system("start file:///" + str(filePath) + "\\" + fileName)
+'''
+ 
+# 修改步驟 6/6, 配合網際程式啟動,  以及 Python 程式執行與納入其他程式執行的特定進行配置
+ 
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)
+</pre>
+<p><span></span></p>
+<p></p>
+<p>           </p>
+<h1>RoboDK 執行</h1>
+<p>心得:</p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/x3Dab0MNV5Q" width="560"></iframe></p>
 <h3>第一題</h3>
 <p><strong><a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></strong></p>
@@ -238,7 +336,7 @@ while idTake &gt;= 0:
 robot.MoveJ([0,0,0,0,10,-200])
 </pre>
 <p></p>
-<h3>第二題</h3>
+<h2>第二題</h2>
 <p><a href="https://drive.google.com/file/d/11GFhWqvkCswY2KbLOPB7vRT0EvoiKpdU/view?usp=sharing">pick and place final 專案下載</a></p>
 <p>1.關閉robodk(沒開就跳過)</p>
 <p>2.Python-robodk-Install.baty在SCITE啟動  (檔案在RObodk裡)</p>
@@ -1296,6 +1394,3 @@ if __name__ == '__main__':
 <h4><span>主機二: Heroku Python 應用程式主機</span></h4>
 <p>請在上述網頁中, 增加一個標題為"<span>動態網站</span>" 的 H1 頁面, 並且利用 CMSiMDE 建立一台動態網站主機. 完成後請在頁面附上所完成的主機連結, 並且將操作流程影片嵌入頁面.</p>
 <p>提示:<span> </span><a href="https://nfulist.herokuapp.com/">https://nfulist.herokuapp.com</a><span> </span>就是一台典型的 Python 應用程式主機. (<a href="https://github.com/mdecourse/nfulist">nfulist 原始碼</a>)</p>
-<div id="gtx-trans" style="position: absolute; left: 39px; top: 273.025px;">
-<div class="gtx-trans-icon"></div>
-</div>
