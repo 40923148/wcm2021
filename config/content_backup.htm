@@ -8,8 +8,12 @@
 <p><span>Heroku動態:<a href="https://c40923148.herokuapp.com/">https://c40923148.herokuapp.com/</a></span></p>
 <p><span>                     <a href="https://a40923148.herokuapp.com/">https://a40923148.herokuapp.com/</a></span></p>
 <p>Fossil:<a href="https://fossil.kmol.info/u/40923148/doc/trunk/content/index.html">https://fossil.kmol.info/u/40923148/doc/trunk/content/index.html</a></p>
+<p>youtube:<a href="https://www.youtube.com/channel/UCDhJVMWEBXm1t_gpFMbIPtw">https://www.youtube.com/channel/UCDhJVMWEBXm1t_gpFMbIPtw</a></p>
 <p></p>
-<p></p><h1>網路環境</h1>
+<p></p>
+<div id="gtx-trans" style="position: absolute; left: 46px; top: 307.875px;">
+<div class="gtx-trans-icon"></div>
+</div><h1>網路環境</h1>
 <p><span>在學校:</span></p>
 <p><span>在家裡:</span></p>
 <h1>Heroku 網站</h1>
@@ -1301,8 +1305,35 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>把更新的內容變成一個專案，記得要加上代號</p>
 <p><strong>git push</strong></p>
 <p>把全部的東西推送到遠端</p>
+<p><strong>git pull</strong></p>
+<p> 擷取遠端內容(被人更改無法推送時使用，或近端出錯)</p>
+<p><strong>start cms</strong></p>
+<p>開出新的命令提示字元</p>
+<p><strong><a>https://localhost:9443 </a></strong></p>
+<p>登入動態</p>
+<p><strong>git checkout af1427a529bb1b4a3ba35c5ed0e5bad23238c253 </strong></p>
+<p>之前可以的版本號</p>
+<p><br/><strong>regedit</strong></p>
+<p>編輯</p>
 <p><strong>path</strong></p>
 <p>路徑</p>
+<p><strong>git clone --recurse-submodules https://github.com/40923148/wcm2021.git</strong></p>
+<p>抓網站(從github裡面(https://github.com/mdecourse/cmstemplate(老師的)Use this template)</p>
+<p><strong>ipconfig /all </strong></p>
+<p>windows IP 設定</p>
+<p><strong>git branch</strong></p>
+<p>檢視目前分支</p>
+<p><strong>git checkout main</strong></p>
+<p>分支換到main </p>
+<p><strong>mkdir </strong></p>
+<p>增新資料夾</p>
+<p><strong>python</strong></p>
+<p>看版本</p>
+<p></p>
+<p><strong>pip list </strong></p>
+<p>版本</p>
+<p><strong>cls </strong></p>
+<p>清除</p>
 <p><br/><strong>dir</strong></p>
 <p>磁碟內容</p>
 <p><strong>regedit</strong></p>
@@ -1311,8 +1342,37 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>更新到最新的資料</p>
 <p><strong>git clone (github網址).git</strong></p>
 <p>把<span>github倉儲複製到資料夾，以git形式</span></p>
+<p><strong>git remote add gitlab http://gitlab.com/40923148/wcm2021.git</strong></p>
+<p>config內新增新的推送位置</p>
+<p><strong>heroku login</strong></p>
+<p>登入</p>
+<p><strong>heroku login -i</strong></p>
+<p>開heloku  在home新增_netrc  做一個連結</p>
+<p><strong>heroku git:remote -a s40923148</strong></p>
+<p>fossil專用  <span>config內新增新的推送位置</span></p>
+<p><strong>fossil add . </strong></p>
+<p>fossil改版</p>
+<p><strong>fossil commit -m "initial add" </strong></p>
+<p>fossil推送</p>
+<p><strong>fossil open ./../../40923148.fossil</strong></p>
+<p>開啟上上一個資料夾的<span>40923148.fossil</span></p>
+<p><strong>fossil addremove </strong></p>
+<p>fossil改版(有刪除東西</p>
+<p><strong>fossil clone --recurse-submodules https://github.com/40923148/wcm2021.git</strong></p>
+<p><strong>acp   </strong>(fossil版</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">echo off
+set message=%1
+fossil add .
+fossil addremove
+fossil commit -m %message%
+
+</pre>
 <p></p>
-<h1>上課內容</h1>
+<p></p>
+<p></p>
+<div id="gtx-trans" style="position: absolute; left: -26px; top: 1805.87px;">
+<div class="gtx-trans-icon"></div>
+</div><h1>上課內容</h1>
 <h2>w1</h2>
 <p>還未選課沒上到課</p>
 <h2>w2</h2>
@@ -1486,6 +1546,29 @@ if __name__ == '__main__':
 <p>將13~15周所做的事情推到<a href="https://github.com/mdecourse/wcm2021/discussions/19">https://github.com/mdecourse/wcm2021/discussions/19</a></p>
 <p></p>
 <h3>作業</h3>
+<p>16~18周功課布置<span>完成兩台 Heroku 平台上的虛擬主機</span></p>
+<h4><span>主機一: 利用 Heroku 呈現靜態網頁內容.</span></h4>
+<p>此一網站必須包含個人學習心得, 上課過程的筆記, 以及下列各 H1 頁面, 其他 H2 與 H3 頁面由各學員視實際需要自行加入:</p>
+<p>提示: 課程網頁中<a href="http://mde.tw/wcm2021/content/Heroku-%E5%AF%A6%E4%BD%9C.html?q=heroku">與 Heroku 有關</a>的頁面.</p>
+<p>標題為:<span> </span><span>網路環境</span></p>
+<p>說明個人在線上課程階段, 所使用上網環境紀錄報告, 其中包括如何上網, 有哪些設定等. 完成後請將操作流程影片嵌入頁面.</p>
+<p>標題為:<span> </span><span>Heroku 網站</span></p>
+<p>說明如何透過上述網路環境與工具, 完成 Heroku CMSiMDE 靜態網頁的建立. 完成後請將操作流程影片嵌入頁面.</p>
+<p>標題為:<span> </span><span>網路直播</span></p>
+<p>說明如何透過線上 OBS + Youtube 進行直播, 過程中以那些設定與注意事項. 完成後請將操作流程影片嵌入頁面.</p>
+<p>標題為:<span> </span><span>RoboDK 執行</span></p>
+<p>說明曾經做過哪些與 RoboDK相關的練習, 過程中如何進行, 分別獲得那些心得? 完成後請將操作流程影片嵌入頁面.</p>
+<h4><span>主機二: Heroku Python 應用程式主機</span></h4>
+<p>請在上述網頁中, 增加一個標題為"<span>動態網站</span>" 的 H1 頁面, 並且利用 CMSiMDE 建立一台動態網站主機. 完成後請在頁面附上所完成的主機連結, 並且將操作流程影片嵌入頁面.</p>
+<p>提示:<span> </span><a href="https://nfulist.herokuapp.com/">https://nfulist.herokuapp.com</a><span> </span>就是一台典型的 Python 應用程式主機. (<a href="https://github.com/mdecourse/nfulist">nfulist 原始碼</a>)</p><h2>w17</h2>
+<p><span>將16~18周所做的事情推到<a href="https://github.com/mdecourse/wcm2021/discussions/21">https://github.com/mdecourse/wcm2021/discussions/21</a></span></p>
+<p><span>講解各種同學的問體</span></p>
+<h2>w18</h2>
+<p>期末報告3~5分鐘</p>
+<p></p>
+<div id="gtx-trans" style="position: absolute; left: 540px; top: 126.95px;">
+<div class="gtx-trans-icon"></div>
+</div><h3>作業</h3>
 <p>16~18周功課布置<span>完成兩台 Heroku 平台上的虛擬主機</span></p>
 <h4><span>主機一: 利用 Heroku 呈現靜態網頁內容.</span></h4>
 <p>此一網站必須包含個人學習心得, 上課過程的筆記, 以及下列各 H1 頁面, 其他 H2 與 H3 頁面由各學員視實際需要自行加入:</p>
