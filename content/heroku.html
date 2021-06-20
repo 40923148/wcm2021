@@ -134,10 +134,216 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Heroku教學 << <a href='Heroku教學.html'>Previous</a> <a href='W10  W11.html'>Next</a> >> W10  W11<br /><h1>w9</h1>
-<p>自己為自己打分數，我為自己打75分，的原因是我覺得我有認真聽課有把老師交代的作業做完，不懂還特別去找同學請教，相反別人不懂我也有盡心幫忙。</p>
-<p>上台報告，由於我沒做簡報，所以我拿github的倉儲來做報告，因為上面只有我平時對上課的紀錄，跟中老師要求要做的東西，並沒有加以排版所以我報告的十分糟糕。</p>
-<br />Heroku教學 << <a href='Heroku教學.html'>Previous</a> <a href='W10  W11.html'>Next</a> >> W10  W11</div>
+    <div id="tipue_search_content">OBS << <a href='OBS.html'>Previous</a> <a href='fossil.html'>Next</a> >> fossil<br /><h1>heroku</h1>
+<p></p>
+<p>靜態heroku:<a href="https://s40923148.herokuapp.com/content/index.html">https://s40923148.herokuapp.com/content/index.html</a></p>
+<p>1.<span>進入 </span><a href="https://heroku.com/">https://heroku.com</a><span>, 利用學校配發的 @gm 登記一個 Heroku 帳號, 關鍵在於密碼設定必須要至少 8 個字元, 且字元中必須包含符號, 英文字母及數字,  並且登記後要進入 @gm 帳號進行確認後才能開通 Heroku 帳號.</span></p>
+<p>2.建立一個新的倉儲如:s409231xx</p>
+<p>3.下載<span>Heroku cli 程式檔案, 解開至隨身碟</span></p>
+<p>4.修改start的路徑:</p>
+<p>set path_heroku=%Disk%:\heroku\bin; (bin加到路徑<br/>path=%Disk%:;%path_python%;%path_portablegit% ;%path_heroku% ;%path%; 把heroku連結</p>
+<p>5.測試可否執行 輸入:<span>heroku version 若</span><span>回應所使用的版本表示上述路徑設定已經成功</span></p>
+<p>6.heroku login<span> </span>-i <span>以 interactive 模式登入 Heroku, 完成後產生 y:\home_ipv6\_netrc</span></p>
+<p>7.設定同步倉儲  heroku git:remote -a s409231xx</p>
+<p>8.正常推送git push heroku </p>
+<p><img alt="" src="https://youtu.be/hpx5guU0Jjc"/></p>
+<p>           <iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/hpx5guU0Jjc" width="560"></iframe></p>
+<p></p>
+<p></p>
+<p><span>動態heroku:<a href="https://a40923148.herokuapp.com/">https://a40923148.herokuapp.com/</a></span></p>
+<p>                :<a href="https://c40923148.herokuapp.com/">https://c40923148.herokuapp.com/</a></p>
+<p>github倉儲:<a href="https://github.com/40923148/nfulist">https://github.com/40923148/nfulist</a></p>
+<p>1.創新的Heroku，不能用已經推送過的，不然會一直錯誤。</p>
+<p>2.創新的Github，然後把<span> </span><a href="https://github.com/mdecourse/nfulist/blob/master/Procfile">Procfile</a><span>,<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/requirements.txt">requirements.txt</a><span><span> </span>與<span> </span></span><a href="https://github.com/mdecourse/nfulist/blob/master/runtime.txt">runtime.txt</a><span>,<span> ，都推送上去。</span></span></p>
+<p>3.設定wsgi.py(負責打開6~9樓教室課表)(最下面)</p>
+<p>4.最後就是推送，<span>Github跟Heroku，(打開Heroku網址後在網址後加上?<code class="py plain">classroomno<span> </span></code><code class="py keyword">=</code><span><span> </span></span><code class="py string">BGAxxxx可改變教室)</code></span></p>
+<p><span><code class="py string"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/RFIkZ75SfTQ" width="560"></iframe></code></span></p>
+<p>a40923148</p>
+<p></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import requests
+import bs4
+# for os.environ and os.system
+import os
+# for geting html file path
+import pathlib
+# 以下因應改為 Heroku based 程式所需導入模組,  修改步驟 1/6
+from flask import Flask, request 
+from flask_cors import CORS
+ 
+ 
+# 修改步驟 2/6 , 加入 Flask 相關物件設定
+app = Flask(__name__)
+# 此一設定可以讓程式跨網域擷取資料
+CORS(app)
+ 
+# for pythn 3.9,  在近端測試時仍需要設定 proxy, 若使用 Python 3.8 執行則會自動使用系統的 Proxy 設定
+proxy = 'http://[2001:288:6004:17::69]:3128'
+ 
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+'''
+url:  'jclassroom_ajax.php',
+data: { pselyr: pselyr, pselclssroom: pselclssroom },
+'''
+ 
+# 修改步驟 3/6, 試著將程式改為網際模式, 需要套用 Flask 的網際 decorator
+@app.route('/')
+def timeTableList():
+    semester = '1092'
+    classroomno = 'BGA0810'
+    column = True
+ 
+    if semester == None:
+        semester = '1092'
+    if classroomno == None:
+        # BGA0810 電腦輔助設計室
+        classroomno = 'BGA0810'
+         
+    headers = {'X-Requested-With': 'XMLHttpRequest'}
+ 
+    url = 'https://qry.nfu.edu.tw/jclassroom_ajax.php'
+    post_var = {'pselyr': semester, 'pselclssroom': classroomno}
+ 
+    result = requests.post(url, data = post_var, headers = headers)
+ 
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+ 
+    # 先除掉所有 anchor
+    for a in soup.findAll('a'):
+        # bs3 語法
+        #a.replaceWithChildren()
+        # bs4 語法, 將標註與內容拆開
+        a.unwrap()
+ 
+    # 根據輸出設定, 取出 class='tbcls' 的 table 資料
+    table = soup.find('table', {'class': 'tbcls'})
+ 
+    # 重建 table, 設定邊線為 1 pixel
+    output = "&lt;table border='1'&gt;"
+ 
+    for i in table.contents:
+        # 利用 replace 復原  
+        output += str(i).replace(" ", " ")
+    output += "&lt;/table&gt;"
+    #print(output)
+    # 修改步驟 5/6 , 因為已經將原先可列印出程式的步驟改為 function, 因此必須以 return 將擷取到的網頁資料傳回
+    return output
+     
+# 修改步驟 4/6 , 因為改寫為網際程式後, 下列將內容存檔並自動呼叫 Firefox 的程式碼不再適用, 必須蓋掉
+'''
+# 將 output 寫入 w1_classroom.html
+fileName = "w1_classroom.html"
+with open(fileName, "w", encoding="utf-8") as file:
+    file.write(output)
+# 利用 os.system() 以 default browser 開啟 w1_class_local.html
+filePath = pathlib.Path(__file__).parent.absolute()
+#print(filePath)
+# set firefox as default browser and start url to open html file
+os.system("start file:///" + str(filePath) + "\\" + fileName)
+'''
+ 
+# 修改步驟 6/6, 配合網際程式啟動,  以及 Python 程式執行與納入其他程式執行的特定進行配置
+ 
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)
+</pre>
+<p><span></span></p>
+<p></p>
+<p></p>
+<p>c20923148</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request 
+from flask_cors import CORS
+  
+import requests
+import bs4
+#import ssl
+  
+'''
+semester=1091
+
+courseno=0762
+
+cp
+
+1a 1091/0762
+
+1b 1091/0776
+
+cad
+
+2a 1091/0788
+
+2b 1091/0801
+
+https://nfulist.herokuapp.com/?semester=1082&amp;courseno=0767
+cd
+2a 1082/0767
+2b 1082/0780
+  
+2a 1072/0777
+2b 1072/0790
+2a 1062/0788
+2a 1062/0802
+  
+wcm
+1082/0744
+  
+1072/0754
+1062/0765
+  
+wcmj
+1082/2418
+'''
+  
+app = Flask(__name__)
+CORS(app)
+  
+@app.route('/studlist')
+@app.route('/')
+def studlist():
+    semester = request.args.get('semester')
+    courseno = request.args.get('courseno')
+    column = request.args.get('column')
+
+    if semester == None:
+        semester = '1091'
+    if courseno == None:
+        courseno = '0762'
+    
+    headers = {'X-Requested-With': 'XMLHttpRequest'}
+
+    url = 'https://qry.nfu.edu.tw/studlist_ajax.php'
+    post_var = {'pselyr': semester, 'pseqno': courseno}
+  
+    result = requests.post(url, data = post_var, headers = headers)
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+    table = soup.find('table', {'class': 'tbcls'})
+    data = []
+    rows = table.find_all('tr')
+    for row in rows:
+        cols = row.find_all('td')
+        cols = [ele.text.strip() for ele in cols]
+        data.append([ele for ele in cols if ele]) # Get rid of empty values
+    output = ""
+    for i in data[2:]:
+        #print(i[0])
+        if column == "True":
+            output +=i[0] + "&lt;/br&gt;"
+        else:
+            output +=i[0] + "\n"
+        
+    return output
+    #return  str(pselyr) + " + " +str(pseqno)
+  
+# 即使在近端仍希望以 https 模式下執行
+#context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+#context.load_cert_chain('localhost.crt', 'localhost.key')
+  
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)</pre>
+<p> </p><br />OBS << <a href='OBS.html'>Previous</a> <a href='fossil.html'>Next</a> >> fossil</div>
         
     <!-- footer -->
       <div class="container">
